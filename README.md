@@ -2,4 +2,4 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## HNRQ
 
-This is my personal website, hosted at (hnrq.dev)[hnrq.dev]
+This is my personal website, hosted at [hnrq.dev](hnrq.dev)
