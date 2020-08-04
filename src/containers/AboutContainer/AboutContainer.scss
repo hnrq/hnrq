@@ -7,5 +7,10 @@
       letter-spacing: map-get($spacers, 3);
       text-align: right;
     }
+    & hr {
+      width: 50%;
+      margin: 0;
+      margin-bottom: map-get($spacers, 4);
+    }
   }
 }

@@ -13,6 +13,9 @@ $duration: 800ms;
   & .caption {
     margin-top: map-get($spacers, 4) * 3;
     align-self: center;
+    & span {
+      z-index: 1;
+    }
     justify-content: center;
   }
   & .scroll-indicator {
@@ -21,6 +24,7 @@ $duration: 800ms;
   & .figure {
     position: absolute;
     right: 0;
+
     @include phone-only {
       top: 18%;
     }
@@ -63,7 +67,7 @@ $duration: 800ms;
     &::after {
       content: "";
       position: absolute;
-      z-index: 999;
+      z-index: 5;
       top: 0;
       left: 0;
       right: 0;

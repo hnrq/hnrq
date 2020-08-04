@@ -1,6 +1,40 @@
 @import 'variables';
 @import 'queries';
 
+@for $i from 1 through 12 {
+  .col-#{$i} {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    box-sizing: border-box;
+    width: (100%/ 12) * $i;
+    @include phone-only {
+      @if $i >= 5 {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.row {
+  box-sizing: border-box;
+  display: flex;
+  flex: 0 1 auto;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.row.reverse {
+  flex-direction: row-reverse;
+}
+
+.col.reverse {
+  flex-direction: column-reverse;
+}
+.justify-content-center {
+  justify-content: center;
+}
+
 .container {
   position: relative;
   margin: 0 auto;
@@ -14,10 +48,6 @@
     padding-left: map-get($spacers, 5);
     padding-right:  map-get($spacers, 5);
   }
-}
-
-.justify-content-center {
-  justify-content: center;
 }
 
 h1 {
