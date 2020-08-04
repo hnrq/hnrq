@@ -21,8 +21,8 @@ const Header = () => {
       <nav className="navbar">  
         <NavLink to="home" offset={0}>Home</NavLink>
         <NavLink to="about" offset={64}>About</NavLink>
-        <NavLink to="contact" offset={65}>Contact</NavLink>
-        <NavLink to="posts" offset={66}>Posts</NavLink>
+        <NavLink to="posts" offset={65}>Posts</NavLink>
+        <NavLink to="contact" offset={66}>Contact</NavLink>
       </nav>
     </header>
   );

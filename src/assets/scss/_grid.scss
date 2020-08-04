@@ -1,21 +1,6 @@
 @import 'variables';
 @import 'queries';
 
-@for $i from 1 through 12 {
-  .col-#{$i} {
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
-    box-sizing: border-box;
-    width: (100%/ 12) * $i;
-    @include phone-only {
-      @if $i >= 5 {
-        width: 100%;
-      }
-    }
-  }
-}
-
 .container {
   position: relative;
   margin: 0 auto;
@@ -38,9 +23,4 @@
 h1 {
   font-size: 72px;
   text-transform: uppercase;
-}
-
-.row {
-  display: flex;
-  flex-direction: row;
 }

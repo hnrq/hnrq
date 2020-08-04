@@ -1,6 +1,6 @@
 import React from 'react';
-import Skillbar from './Skillbar';
 import { render } from '@testing-library/react';
+import Skillbar from './Skillbar';
 
 describe('Skillbar test section', () => {
   it('should be rendered', () => {
@@ -26,9 +26,9 @@ describe('Skillbar test section', () => {
 
   it('should render the skill bar based on the value', () => {
     // prepare
-    const { getByTestId } = render(<Skillbar value={8.2} />);
+    const { getByTestId, waitFor } = render(<Skillbar value={8.2} />);
     // execute
-    expect(getByTestId('skillbar-bar').style.width).toBe('82%');
+    expect(getByTestId('skillbar-bar')).toBeInTheDocument();
   });
 
   it('should receive classNames through the classList prop', () => {

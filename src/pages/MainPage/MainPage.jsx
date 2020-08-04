@@ -2,6 +2,7 @@
 import React from 'react';
 import { Section } from 'components/Section';
 import { HomeContainer } from 'containers/HomeContainer';
+import { AboutContainer } from 'containers/AboutContainer';
 import './MainPage.scss';
 
 const MainPage = () => (
@@ -10,12 +11,12 @@ const MainPage = () => (
       <HomeContainer />
     </Section>
     <Section name="about">
+      <AboutContainer />
+    </Section>
+    <Section name="posts">
       <h1>hello There</h1>
     </Section>
     <Section name="contact">
-      <h1>hello There</h1>
-    </Section>
-    <Section name="posts">
       <h1>hello There</h1>
     </Section>
   </div>

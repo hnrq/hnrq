@@ -1,0 +1,11 @@
+@import '~assets/scss/variables';
+
+.about-container {
+  & .title {
+    align-items: flex-end;
+    & h1 {
+      letter-spacing: map-get($spacers, 3);
+      text-align: right;
+    }
+  }
+}
