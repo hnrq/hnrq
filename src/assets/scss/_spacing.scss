@@ -1,0 +1,39 @@
+@import 'variables';
+
+@each $key, $value in $spacers {
+  .p-#{$key} {
+    padding: $value;
+  }
+  .px-#{$key} {
+    padding-left: $value;
+    padding-right: $value;
+  }
+
+  .py-#{$key} {
+    padding-top: $value;
+    padding-bottom: $value;
+  }
+
+  .m-#{$key} {
+    margin: $value;
+  }
+  .mx-#{$key} {
+    margin-left: $value;
+    margin-right: $value;
+  }
+
+  .my-#{$key} {
+    margin-top: $value;
+    margin-bottom: $value;
+  }
+
+  @each $posKey, $position in (t: top, l: left, b: bottom, r: right) {
+    .p#{$posKey}-#{$key} {
+      padding-#{$position}: $value;
+    }
+
+    .m#{$posKey}-#{$key} {
+      margin-#{$position}: $value;
+    }
+  }
+}

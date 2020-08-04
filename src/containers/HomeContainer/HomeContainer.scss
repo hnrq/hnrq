@@ -1,0 +1,123 @@
+@import '~assets/scss/variables';
+@import '~assets/scss/queries';
+@import '~assets/scss/mixins';
+
+$delay: 500ms;
+$duration: 800ms;
+
+.home-container {
+  height: 100%;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  & .caption {
+    margin-top: map-get($spacers, 4) * 3;
+    align-self: center;
+    justify-content: center;
+  }
+  & .scroll-indicator {
+    align-items: center;
+  }
+  & .figure {
+    position: absolute;
+    right: 0;
+    @include phone-only {
+      top: 18%;
+    }
+  }
+
+  & .reveal-text,
+  & .reveal-text::after {
+    letter-spacing: map-get($spacers, 3);
+    animation-fill-mode: both;
+    animation-timing-function: cubic-bezier(0.0, 0.0, 0.2, 1);
+  }
+  @for $i from 1 through 4 {
+    & .reveal-text:nth-child(#{$i}),
+    & .reveal-text:nth-child(#{$i})::after {
+      animation-delay: ($duration * $i);
+      animation-iteration-count: 1;
+      animation-duration: $duration;
+    }
+  }
+  & .mouse-wheel{
+    height: map-get($spacers, 5);
+    margin: map-get($spacers, 1) auto 0;
+    display: block;
+    transform: scaleY(0);
+    width: map-get($spacers, 2);
+    background-color: white;
+    @include animation(1.6s ease infinite mouse-wheel);
+    animation-delay: 500ms;
+  }
+
+  & .reveal-text {
+    letter-spacing: map-get($spacers, 3);
+    position: relative;
+    font-size: 4rem;
+    z-index: 1;
+    animation-name: clip-text;
+    color: white;
+    white-space: nowrap;
+    cursor: default;
+    &::after {
+      content: "";
+      position: absolute;
+      z-index: 999;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: white;
+      transform: scaleX(0);
+      transform-origin: 0 50%;
+      pointer-events: none;
+      animation-name: text-revealer;
+    }
+  }
+}
+
+@include keyframes(mouse-wheel) {
+  0%, 30% {
+		transform-origin: 50% 0;
+	}
+	40%, 70% {
+		transform-origin: 50% 100%;		
+	}
+	40% {
+		transform: scaleY(1);
+	}
+	70% {
+		transform: scaleY(0);
+  }
+  100% {
+		transform: scaleY(0);
+	}
+}
+
+@include keyframes(clip-text) {
+	from {
+		clip-path: inset(0 100% 0 0);
+	}
+	to {
+		clip-path: inset(0 0 0 0);
+	}
+}
+
+
+@include keyframes(text-revealer) {
+	0%, 50% {
+		transform-origin: 0 50%;
+	}
+	60%, 100% {
+		transform-origin: 100% 50%;		
+	}
+	60% {
+		transform: scaleX(1);
+	}
+	100% {
+		transform: scaleX(0);
+	}
+}
+
+

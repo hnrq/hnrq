@@ -1,0 +1,33 @@
+.nav-link {
+  text-decoration: none;
+  font-family: 'B612 Mono', monospace;
+  color: #ffffff;
+  position: relative;
+  text-transform: uppercase;
+  z-index: 1;
+  transition: cubic-bezier(0.6, -0.28, 0.735, 0.045) .2s color;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: cubic-bezier(0.6, -0.28, 0.735, 0.045) .2s width;
+    background-color: #ffffff;
+    width: 0;
+    height: 100%;
+  }
+  &:hover {
+    cursor: pointer;
+    color: black;
+    &::before {
+      width: 100%;
+    }
+  }
+  &.active {
+    color: black;
+    &::before {
+      width: 100%;
+    }
+  }
+}

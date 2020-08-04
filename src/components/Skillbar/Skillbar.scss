@@ -1,0 +1,19 @@
+.skillbar {
+  display: flex;
+  font-family: 'B612 Mono', monospace;
+  flex-direction: column;
+  width: 100%;
+  & .skillbar-info {
+    display: flex;
+    justify-content: space-between;
+  }
+  & .bar {
+    border: 2px solid white;
+    height: 32px;
+    width: 100%;
+    & .skillbar-bar {
+      height: 32px;
+      background-color: white;
+    }
+  }
+}
