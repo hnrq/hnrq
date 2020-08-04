@@ -20,8 +20,12 @@ const Skillbar = ({
 }: Props) => (
   <motion.div 
     data-testid="skillbar" 
-    animate={{ y: 0, opacity: 1 }}
-    initial={{ y: 100, opacity: 0 }}
+    variants={{
+      hidden: { y: 100, opacity: 0 },
+      show: { y: 0, opacity: 1 }
+    }}
+    initial="hidden"
+    animate="show"
     className={classNames('skillbar', classList)}
     transition={{
       y: { stiffness: 1000, velocity: -100 },
@@ -36,8 +40,12 @@ const Skillbar = ({
     </div>
     <div className="bar">
       <motion.div
-        initial={{ width: 0 }}
-        animate={{ width: `${value * 10}%` }}
+        variants={{
+          hidden: { width: 0 },
+          show: { width: `${value * 10}%` }
+        }}
+        initial="hidden"
+        animate="show"
         transition={{ 
           duration: 2,
           delay: 0.25,

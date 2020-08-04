@@ -15,13 +15,13 @@ const Section = ({
   classList,
   children
 }: Props) => (
-    <section 
-      name={name} 
-      className={classNames("container", classList)}
-      data-testid="section"
-    >
-      {children}
-    </section>
+  <section 
+    name={name} 
+    className={classNames("container", classList)}
+    data-testid="section"
+  >
+    {children}
+  </section>
   );
 
 export default ScrollElement(Section);

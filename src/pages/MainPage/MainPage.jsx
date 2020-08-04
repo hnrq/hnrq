@@ -7,16 +7,17 @@ import './MainPage.scss';
 
 const MainPage = () => (
   <div className="main-page">
-    <Section name="home" classList="home">
+    
+    <Section name="home" containerId="home" classList="home">
       <HomeContainer />
     </Section>
-    <Section name="about">
+    <Section name="about" containerId="about">
       <AboutContainer />
     </Section>
-    <Section name="posts">
+    <Section name="posts" containerId="posts">
       <h1>hello There</h1>
     </Section>
-    <Section name="contact">
+    <Section name="contact" containerId="contact">
       <h1>hello There</h1>
     </Section>
   </div>

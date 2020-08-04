@@ -1,6 +1,17 @@
 @import '~assets/scss/variables';
+@import '~assets/scss/queries';
 
 .about-container {
+  & a {
+    font-weight: bold;
+    color: white;
+  }
+  & p {
+    font-family: 'B612 Mono', monospace;
+  }
+  & .info {
+    font-family: 'B612 Mono', monospace;
+  }
   & .title {
     align-items: flex-end;
     & h1 {
@@ -11,6 +22,18 @@
       width: 50%;
       margin: 0;
       margin-bottom: map-get($spacers, 4);
+    }
+  }
+  @include phone-only {
+    .skills {
+      padding-left: 0;
+    }
+    .info {
+      padding-left: 0;
+      padding-bottom: map-get($spacers, 4);
+    }
+    .text {
+      padding-left: 0;
     }
   }
 }

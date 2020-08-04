@@ -22,10 +22,10 @@ const HomeContainer = () => (
       </div>
     </div>
     <div className="row">
-      <div className="col-12  scroll-indicator mb-5">
-        <small className="mb-3">Scroll Down</small>
-      <div className="mouse-wheel" />
-    </div>
+      <div className="col-12  scroll-indicator mb-6 caption">
+        <span className="mb-3">Scroll Down</span>
+        <div className="mouse-wheel" />
+      </div>
     </div>
   </div>
 );
