@@ -43,6 +43,7 @@ const Icosahedron = ({ classList }: Props) => {
 
 		handleWindowResize();
 		const controls = new OrbitControls( camera, effect.domElement );
+		controls.enableZoom = false;
 		effect.domElement.style.color = 'white';
 		effect.domElement.style.backgroundColor = 'black';
 

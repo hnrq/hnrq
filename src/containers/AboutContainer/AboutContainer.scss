@@ -7,6 +7,9 @@
   }
   & h4 {
     font-family: 'B612 Mono', monospace;
+    @include phone-only {
+      margin-top: map-get($spacers, 4);
+    }
   }
   & p {
     font-family: 'B612 Mono', monospace;
