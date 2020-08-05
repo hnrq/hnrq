@@ -1,3 +1,42 @@
+@import '~assets/scss/queries';
+@import '~assets/scss/variables';
+
 .posts-container {
-    
+  flex: 1;
+  display: flex;
+  height: 100%;
+  & .title {
+    align-items: flex-end;
+    & h1 {
+      letter-spacing: map-get($spacers, 3);
+      text-align: right;
+    }
+    & hr {
+      width: 50%;
+      margin: 0;
+      margin-bottom: map-get($spacers, 4);
+    }
+  }
+  & .row {
+    flex: 1;
+    @include phone-only {
+      flex-direction: column;
+    }
+  }
+  & .posts {
+    border: 2px solid white ;
+    box-sizing: border-box;
+    align-self: stretch;
+    @include phone-only {
+      padding: 0;
+      flex: 1
+    }
+  }
+
+  .spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
 }

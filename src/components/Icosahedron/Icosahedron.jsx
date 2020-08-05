@@ -6,7 +6,8 @@ import classNames from 'classnames';
 import './Icosahedron.scss';
 
 type Props = {
-  classList: Array<string> | string
+  // String array or single string of classNames
+  classList: Array<string> | string,
 };
 
 const Icosahedron = ({ classList }: Props) => {

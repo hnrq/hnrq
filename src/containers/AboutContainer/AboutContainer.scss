@@ -4,7 +4,9 @@
 .about-container {
   & a {
     font-weight: bold;
-    color: white;
+  }
+  & h4 {
+    font-family: 'B612 Mono', monospace;
   }
   & p {
     font-family: 'B612 Mono', monospace;
@@ -24,6 +26,11 @@
       margin-bottom: map-get($spacers, 4);
     }
   }
+
+  .icon-link {
+    font-size: 0.75rem
+  }
+
   @include phone-only {
     .skills {
       padding-left: 0;

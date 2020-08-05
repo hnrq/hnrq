@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800;900&display=swap');
 @import './assets/scss/grid';
 @import './assets/scss/spacing';
+@import './assets/scss/anchor';
 @import './assets/scss/queries';
 
 * {
@@ -12,6 +13,7 @@ html {
   @include phone-only {
     font-size: 14px;
   }
+  height: 100%;
 }
 
 footer {
@@ -21,6 +23,7 @@ footer {
 body {
   font-family: 'Montserrat', sans-serif;
   color: white;
+  height: 100%;
   overflow-x: hidden;
   padding: 0;
   margin: 0;
