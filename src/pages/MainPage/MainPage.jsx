@@ -15,7 +15,7 @@ const MainPage = () => (
     <Section name="about" containerId="about">
       <AboutContainer />
     </Section>
-    <Section name="posts" containerId="posts">
+    <Section classList="posts" name="posts" containerId="posts">
       <PostsContainer />
     </Section>
   </div>

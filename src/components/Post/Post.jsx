@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import { format } from 'date-fns';
+import { motion } from 'framer-motion';
 import './Post.scss';
 
 type Props = {
@@ -20,6 +21,23 @@ type Props = {
   url: string
 }
 
+const variants = {
+  show: {
+    opacity: 1,
+    scale: 1
+  },
+  hidden: {
+    opacity: 0,
+    scale: 0.9
+  },
+  hover: { 
+    scale: 1.02, 
+    transition: {
+      duration: 0.1
+    } 
+  }
+}
+
 const Post = ({
   title,
   url,
@@ -29,11 +47,15 @@ const Post = ({
   reactionsCount,
   commentsCount
 }: Props) => (
-  <a 
-    className="post m-4 p-4" 
+  <motion.a 
+    className="post m-4 p-4"
     href={url}
+    whileHover="hover"
+    initial="hidden"
+    animate="show"
     data-testid="post"
     target="_blank"
+    variants={variants}
     rel="noopener noreferrer"
   >
     <div className="post-info">
@@ -48,7 +70,7 @@ const Post = ({
       <span className="post-reactions-count mr-5" data-testid="post-reactions-count">{reactionsCount} Likes</span>
       <span className="post-comments-count" data-testid="post-comments-count">{commentsCount} Comments</span>
     </div>
-  </a>
+  </motion.a>
 );
 
 Post.defaultProps = {

@@ -2,7 +2,6 @@
 @import '~assets/scss/variables';
 
 .posts-container {
-  flex: 1;
   display: flex;
   height: 100%;
   & .title {
@@ -18,25 +17,38 @@
     }
   }
   & .row {
+    flex-wrap: nowrap;
     flex: 1;
     @include phone-only {
       flex-direction: column;
     }
   }
   & .posts {
+    overflow: auto;
     border: 2px solid white ;
     box-sizing: border-box;
     align-self: stretch;
     @include phone-only {
       padding: 0;
+      margin-left: 0;
       flex: 1
+    }
+    .no-posts-message {
+      font-family: 'B612 Mono', monospace;
+      display: flex;
+      justify-content: center;
+      height: 100%;
+      width: 100%;
+      align-items: center;
+
     }
   }
 
   .spinner-container {
     display: flex;
     justify-content: center;
-    align-items: center;
     height: 100%;
+    width: 100%;
+    align-items: center;
   }
 }

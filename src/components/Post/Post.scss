@@ -3,21 +3,23 @@
 .post {
   display: block;
   border: 1px solid white;
+  text-decoration: none;
   color: white;
   transition: ease-in 0.2s;
   & .post-info {
     display: flex;
     flex-direction: column;
   }
-  & .post-tag {
-    font-family: 'B612 Mono', monospace;
-    &::before {
-      content: '#'
+  & .post-tags {
+    max-width: 300px;
+    display: flex;
+    flex-wrap: wrap;
+    & .post-tag {
+      font-family: 'B612 Mono', monospace;
+      &::before {
+        content: '#'
+      }
     }
-  }
-
-  &:hover{
-    transform: scale(1.02);;
   }
 
   & .post-footer {

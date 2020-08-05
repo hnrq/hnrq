@@ -25,9 +25,9 @@
     }
   }
   &.active {
-    color: black;
+    color: white;
     &::before {
-      width: 100%;
+      width: 0%;
     }
   }
 }

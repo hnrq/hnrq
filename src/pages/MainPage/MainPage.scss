@@ -1,2 +1,5 @@
 .main-page {
+  & > .posts {
+    height: 99vh;
+  }
 }
