@@ -28,7 +28,6 @@ const NavLink = ({
       offset={offset}
       className={classNames("nav-link px-4 mx-3", classList)}
       spy
-      hashSpy
       data-testid="nav-link"
     >
       {children}

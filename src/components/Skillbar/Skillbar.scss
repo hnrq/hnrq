@@ -2,6 +2,7 @@
 
 .skillbar {
   display: flex;
+  box-sizing: border-box;
   font-family: 'B612 Mono', monospace;
   flex-direction: column;
   width: 100%;
@@ -11,10 +12,15 @@
   }
   & .bar {
     border: 2px solid white;
+    position: relative;
+    box-sizing: border-box;
     height: map-get($spacers, 5);
     width: 100%;
     & .skillbar-bar {
       height: map-get($spacers, 5);
+      position: absolute;
+      left: -1px;
+      top: -2px;
       background-color: white;
     }
   }

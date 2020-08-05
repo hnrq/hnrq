@@ -39,7 +39,7 @@ const PostsContainer = () => {
       initial={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
       className="posts-container">
-      <div className="row mt-6">
+      <div className="row mt-6 pt-4">
         <div className="col-6 title">
           <h1 className="mt-0 mb-2">DEV.TO</h1>
           <h1 className="mt-0 mb-2">POSTS</h1>

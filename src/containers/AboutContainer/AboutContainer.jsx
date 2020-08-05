@@ -31,7 +31,7 @@ const AboutContainer = () => {
       initial={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
       className="about-container">
-      <div className="row ml-4 mt-6">
+      <div className="row mt-6">
         <div className="col-6 title">
           <h1 className="mt-0 mb-2">ABOUT</h1>
           <h1 className="mt-0 mb-2">ME</h1>
@@ -43,7 +43,7 @@ const AboutContainer = () => {
           <span className="mb-2"><b>Works as:</b> Front-end Developer</span>
           <span className="mb-2"><b>Lives in:</b> Belo Horizonte, Brazil</span>
           <div className="row mt-3">
-            {Object.entries(mediaLinks).map(([key, { link, icon }], index) => index < 5 && (
+            {Object.entries(mediaLinks).map(([key, link], index) => index < 5 && (
               <a 
               key={key}
               href={link} 
@@ -86,7 +86,7 @@ const AboutContainer = () => {
           <div className="pl-5 col-6 text">
           <h4 className="mt-0 mb-3">Bio:</h4>
           <p className="mt-0">
-            Undergraduate Software Engineering student who spends his spare time losing his sanity in Dota 2,
+            Software Engineer who spends his spare time losing his sanity in Dota 2,
             talking s*** on <a 
               href={mediaLinks['twitter'].link} 
               target="_blank" 
@@ -94,14 +94,14 @@ const AboutContainer = () => {
               className="link"
             >
               Twitter
-            </a> and, sometimes, tries to be 
-            productive and learn something new about UI/UX design, Web and Mobile Development. 
-             Also  writes about his programming misadventures on <a
+            </a>, editing videos, muddling through Illustrator, and trying to learn 
+              something new about UI/UX design, Web and Mobile Development. 
+              Also writes about his programming misadventures on <a
               href={mediaLinks['devto'].link} 
               target="_blank" 
               rel="noopener noreferrer"
               className="link"
-            >Dev.to</a> 
+            >Dev.to</a>.
           </p>
         </div>
       </div>

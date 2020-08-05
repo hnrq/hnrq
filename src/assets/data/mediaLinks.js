@@ -1,40 +1,10 @@
-import {
-  GitHubIcon,
-  InstagramIcon,
-  LinkedinIcon,
-  TelegramIcon,
-  TwitchIcon,
-  DevtoIcon,
-  TwitterIcon
-} from 'icons';
-
 export default {
-  github: {
-    link:"https://github.com/alberoneramos",
-    icon: GitHubIcon
-  },
-  twitch: {
-    link:"https://twitch.com/alberoneramos",
-    icon: TwitchIcon
-  },
-  twitter: {
-    link:"https://twitter.com/alberoneramos",
-    icon: TwitterIcon
-  },
-  telegram: {
-    link:"https://t.me/sameoldsenna",
-    icon: TelegramIcon
-  },
-  linkedin: {
-    link: 'https://www.linkedin.com/in/henrique-ramos-83406410b/',
-    icon: LinkedinIcon
-  },
-  devto: {
-    link:"https://dev.to/hnrq",
-    icon: DevtoIcon
-  },
-  instagram: {
-    link: 'https://instagram.com/alberoneramos',
-    icon: InstagramIcon
-  },
+  github: "https://github.com/alberoneramos",
+  twitch: "https://twitch.com/alberoneramos",
+  twitter: "https://twitter.com/alberoneramos",
+  linkedin:  'https://www.linkedin.com/in/henrique-ramos-83406410b/',
+  deviantArt: "https://deviantart.com/alberoneramos",
+  devto: "https://dev.to/hnrq",
+  telegram: "https://t.me/sameoldsenna",
+  instagram:  'https://instagram.com/alberoneramos',
 }
