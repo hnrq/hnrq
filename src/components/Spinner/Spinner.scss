@@ -1,0 +1,32 @@
+@import '~assets/scss/variables';
+@import '~assets/scss/mixins';
+
+.spinner {
+  width: map-get($spacers, 5);
+  margin: map-get($spacers, 1) auto 0;
+  display: block;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  height: map-get($spacers, 2);
+  background-color: white;
+  @include animation(1.6s ease infinite mouse-wheel);
+  animation-delay: 500ms;
+}
+
+@include keyframes(loading) {
+  0%, 30% {
+		transform-origin: 0 50%;
+	}
+	40%, 70% {
+		transform-origin: 100% 50%;		
+	}
+	40% {
+		transform: scaleX(1);
+	}
+	70% {
+		transform: scaleX(0);
+  }
+  100% {
+		transform: scaleX(0);
+	}
+}
