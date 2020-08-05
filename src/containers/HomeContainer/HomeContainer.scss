@@ -26,7 +26,6 @@ $duration: 800ms;
   & .figure {
     position: absolute;
     right: 0;
-
     @include phone-only {
       top: 18%;
     }
