@@ -46,8 +46,8 @@
   padding-top: map-get($spacers, 6) * 2;
   box-sizing: border-box;
   @include phone-only {
-    padding-left: map-get($spacers, 5);
-    padding-right:  map-get($spacers, 5);
+    margin-left: map-get($spacers, 5);
+    margin-right:  map-get($spacers, 5);
   }
 }
 

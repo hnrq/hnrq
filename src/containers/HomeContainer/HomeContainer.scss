@@ -1,4 +1,5 @@
 @import '~assets/scss/variables';
+@import '~assets/scss/position';
 @import '~assets/scss/queries';
 @import '~assets/scss/mixins';
 
@@ -12,6 +13,7 @@ $duration: 800ms;
   flex: 1;
   flex-direction: column;
   & .caption {
+    background: black;
     margin-top: map-get($spacers, 4) * 3;
     font-family: 'B612 Mono', monospace;
     align-self: center;
@@ -29,6 +31,14 @@ $duration: 800ms;
     @include phone-only {
       top: 18%;
     }
+  }
+
+  & .scroll-down {
+    bottom: 0;
+    @include phone-only {
+     margin-bottom: 1vh;
+    }
+    width: 100%;
   }
 
   & .reveal-text,

@@ -39,7 +39,7 @@ const AboutContainer = () => {
         </div>
         <div className="col-6 info pl-5 mt-4">
           <span className="mb-2"><b>Name:</b> Henrique Alberone Ramos</span>
-          <span className="mb-2"><b>Birthdate:</b> August, 21, 1999</span>
+          <span className="mb-2"><b>Birthdate:</b> August 21st, 1999</span>
           <span className="mb-2"><b>Works as:</b> Front-end Developer</span>
           <span className="mb-2"><b>Lives in:</b> Belo Horizonte, Brazil</span>
           <div className="row mt-3 mb-4">
