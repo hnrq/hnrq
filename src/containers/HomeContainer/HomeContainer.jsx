@@ -7,7 +7,7 @@ const HomeContainer = () => (
   <div className="home-container">
     <div>
       <div className="row">
-        <div className="col-sm-12 col-6 justify-content-center mt-6">
+        <div className="col-sm-12 col-6 justify-content-center mt-4 title">
           <h1 className="reveal-text mt-0 mb-3">WORK IT</h1>
           <h1 className="reveal-text mt-0 mb-3">HRDR</h1>
           <h1 className="reveal-text mt-0 mb-3">MAKE IT </h1>

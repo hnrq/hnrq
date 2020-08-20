@@ -13,7 +13,9 @@ $duration: 800ms;
   flex: 1;
   flex-direction: column;
   & .caption {
-    background: black;
+    & > span {
+      background: black;
+    }
     margin-top: map-get($spacers, 4) * 3;
     font-family: 'B612 Mono', monospace;
     align-self: center;
@@ -36,7 +38,7 @@ $duration: 800ms;
   & .scroll-down {
     bottom: 0;
     @include phone-only {
-     margin-bottom: 1vh;
+     margin-bottom: map-get($spacers, 6);
     }
     width: 100%;
   }
@@ -64,6 +66,12 @@ $duration: 800ms;
     background-color: white;
     @include animation(1.6s ease infinite mouse-wheel);
     animation-delay: 500ms;
+  }
+
+  & .title {
+    @include phone-only {
+      margin-top: map-get($spacers, 6);
+    }
   }
 
   & .reveal-text {
