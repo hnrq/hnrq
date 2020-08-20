@@ -35,10 +35,16 @@ $duration: 800ms;
     }
   }
 
+  .main-content {
+    @include phone-only {
+      margin-top: 0;
+    }
+  }
+
   & .scroll-down {
     bottom: 0;
     @include phone-only {
-     margin-bottom: map-get($spacers, 6);
+      margin-bottom: map-get($spacers, 6);
     }
     width: 100%;
   }
@@ -47,7 +53,7 @@ $duration: 800ms;
   & .reveal-text::after {
     letter-spacing: map-get($spacers, 3);
     animation-fill-mode: both;
-    animation-timing-function: cubic-bezier(0.0, 0.0, 0.2, 1);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
   }
   @for $i from 1 through 4 {
     & .reveal-text:nth-child(#{$i}),
@@ -57,7 +63,7 @@ $duration: 800ms;
       animation-duration: $duration;
     }
   }
-  & .mouse-wheel{
+  & .mouse-wheel {
     height: map-get($spacers, 5);
     margin: map-get($spacers, 1) auto 0;
     display: block;
@@ -84,7 +90,7 @@ $duration: 800ms;
     white-space: nowrap;
     cursor: default;
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       z-index: 5;
       top: 0;
@@ -101,46 +107,47 @@ $duration: 800ms;
 }
 
 @include keyframes(mouse-wheel) {
-  0%, 30% {
-		transform-origin: 50% 0;
-	}
-	40%, 70% {
-		transform-origin: 50% 100%;		
-	}
-	40% {
-		transform: scaleY(1);
-	}
-	70% {
-		transform: scaleY(0);
+  0%,
+  30% {
+    transform-origin: 50% 0;
+  }
+  40%,
+  70% {
+    transform-origin: 50% 100%;
+  }
+  40% {
+    transform: scaleY(1);
+  }
+  70% {
+    transform: scaleY(0);
   }
   100% {
-		transform: scaleY(0);
-	}
+    transform: scaleY(0);
+  }
 }
 
 @include keyframes(clip-text) {
-	from {
-		clip-path: inset(0 100% 0 0);
-	}
-	to {
-		clip-path: inset(0 0 0 0);
-	}
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
 }
-
 
 @include keyframes(text-revealer) {
-	0%, 50% {
-		transform-origin: 0 50%;
-	}
-	60%, 100% {
-		transform-origin: 100% 50%;		
-	}
-	60% {
-		transform: scaleX(1);
-	}
-	100% {
-		transform: scaleX(0);
-	}
+  0%,
+  50% {
+    transform-origin: 0 50%;
+  }
+  60%,
+  100% {
+    transform-origin: 100% 50%;
+  }
+  60% {
+    transform: scaleX(1);
+  }
+  100% {
+    transform: scaleX(0);
+  }
 }
-
-

@@ -10,6 +10,9 @@
 }
 
 html {
+  @include large-desktop-only {
+    font-size: 20px;
+  }
   @include phone-only {
     font-size: 14px;
   }

@@ -3,9 +3,14 @@
     @content;
   }
 }
-
 @mixin desktop-only {
   @media only screen and (min-width: 960px) {
+    @content;
+  }
+}
+
+@mixin large-desktop-only {
+  @media only screen and (min-height: 800px) {
     @content;
   }
 }
