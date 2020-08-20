@@ -39,6 +39,9 @@
   position: relative;
   margin: 0 auto;
   max-width: 860px;
+  @include large-desktop-only {
+    max-width: 960px;
+  }
   display: flex;
   min-height: 99vh;
   flex-direction: column;
@@ -47,7 +50,7 @@
   box-sizing: border-box;
   @include phone-only {
     margin-left: map-get($spacers, 5);
-    margin-right:  map-get($spacers, 5);
+    margin-right: map-get($spacers, 5);
   }
 }
 
