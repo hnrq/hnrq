@@ -1,11 +1,11 @@
-import React from 'react';
+import { useEffect } from 'react';
 import './App.scss';
 import { LandingPage } from 'pages/LandingPage';
 import { Header } from 'containers/Header';
 import ReactGA from 'react-ga';
 
 const App = () => {
-  React.useEffect(() => {
+  useEffect(() => {
     ReactGA.initialize('UA-178053844-1');
   }, []);
 
@@ -13,7 +13,7 @@ const App = () => {
     <div className="app">
       <Header />
       <LandingPage />
-      <footer></footer>
+      <footer />
     </div>
   );
 };

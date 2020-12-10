@@ -1,23 +1,24 @@
-import React from 'react';
 import { render } from '@testing-library/react';
 import Post from './Post';
 
 describe('Post test section', () => {
-  it('should receive an URL' , () => {
+  it('should receive an URL', () => {
     // prepare
-    const { getByTestId } = render(<Post title="Example post" url="http://t.me/"/>);
+    const { getByTestId } = render(
+      <Post title="Example post" url="http://t.me/" />
+    );
     // execute
     expect(getByTestId('post').getAttribute('href')).toBe('http://t.me/');
-  })
+  });
   it('should render the title.', () => {
     // prepare
-    const { getByTestId } = render(<Post title="Example post"/>);
+    const { getByTestId } = render(<Post title="Example post" />);
     // execute
     expect(getByTestId('post-title').textContent).toBe('Example post');
   });
   it('should render the author.', () => {
     // prepare
-    const { getByTestId } = render(<Post author="John Doe"/>);
+    const { getByTestId } = render(<Post author="John Doe" />);
     // execute
     expect(getByTestId('post-author').textContent).toBe('John Doe');
   });
@@ -25,7 +26,7 @@ describe('Post test section', () => {
     // prepare
     const { getByTestId } = render(<Post date="2020-07-27T16:17:42Z" />);
     // execute
-    expect(getByTestId('post-date').textContent).toBe('27 Jul 2020')
+    expect(getByTestId('post-date').textContent).toBe('27 Jul 2020');
   });
   it('should render the tags.', () => {
     // prepare

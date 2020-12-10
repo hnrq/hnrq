@@ -1,9 +1,15 @@
-import React, { Suspense, useState, useEffect, useCallback } from 'react';
+import { 
+  Suspense, 
+  useState, 
+  lazy,
+  useEffect, 
+  useCallback 
+} from 'react';
 import { Spinner } from 'components/Spinner';
 import { motion } from 'framer-motion';
 import './PostsContainer.scss';
 
-const PostRenderer = React.lazy(() => import('./PostRenderer'));
+const PostRenderer = lazy(() => import('./PostRenderer'));
 
 const postsVariants = {
   show: {
@@ -18,9 +24,9 @@ const PostsContainer = () => {
   const fetchPosts = useCallback(async (url) => {
     try {
       const data = await (await fetch(url)).json();
-      setPosts(data);
+      return setPosts(data);
     } catch (error) {
-      console.log(error);
+      return error;
     }
   }, []);
 
@@ -46,11 +52,11 @@ const PostsContainer = () => {
           variants={postsVariants}
         >
           <Suspense
-            fallback={
+            fallback={(
               <div className="spinner-container">
                 <Spinner />
               </div>
-            }
+            )}
           >
             <PostRenderer posts={posts} />
           </Suspense>

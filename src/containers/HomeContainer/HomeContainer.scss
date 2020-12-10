@@ -35,12 +35,6 @@ $duration: 800ms;
     }
   }
 
-  .main-content {
-    @include phone-only {
-      margin-top: 0;
-    }
-  }
-
   & .scroll-down {
     bottom: 0;
     @include phone-only {

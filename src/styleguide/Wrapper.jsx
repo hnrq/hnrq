@@ -1,12 +1,11 @@
-import React from 'react';
 
-type Props = {
+type WrapperProps = {
   /** Child component */
-  children: Array<React.Element<any>>
+  children: Array<React.Element<any>>,
 };
 
-const Wrapper = ({ children }: Props) => (
-  <div style={{background: 'black', color: 'white'}}>{children}</div>
+const Wrapper = ({ children }: WrapperProps) => (
+  <div style={{ background: 'black', color: 'white' }}>{children}</div>
 );
 
 export default Wrapper;

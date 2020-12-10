@@ -1,5 +1,3 @@
-// @flow
-import React from 'react';
 import { Icosahedron } from 'components/Icosahedron';
 import './HomeContainer.scss';
 

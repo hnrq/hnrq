@@ -4,5 +4,5 @@ export default (fn, wait) => {
     const context = this;
     clearTimeout(timeout);
     timeout = setTimeout(() => fn.apply(context, args), wait);
-  }
+  };
 };

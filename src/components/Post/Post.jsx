@@ -1,10 +1,9 @@
 // @flow
-import React from 'react';
 import { format } from 'date-fns';
 import { motion } from 'framer-motion';
 import './Post.scss';
 
-type Props = {
+type PostProps = {
   /** Title of the post */
   title: string,
   /** Author of the post */
@@ -18,25 +17,25 @@ type Props = {
   /** Number of comments of the post */
   commentsCount: number,
   /** The post URL */
-  url: string
-}
+  url: string,
+};
 
 const variants = {
   show: {
     opacity: 1,
-    scale: 1
+    scale: 1,
   },
   hidden: {
     opacity: 0,
-    scale: 0.9
+    scale: 0.9,
   },
-  hover: { 
-    scale: 1.02, 
+  hover: {
+    scale: 1.02,
     transition: {
-      duration: 0.1
-    } 
-  }
-}
+      duration: 0.1,
+    },
+  },
+};
 
 const Post = ({
   title,
@@ -45,9 +44,9 @@ const Post = ({
   date,
   tags,
   reactionsCount,
-  commentsCount
-}: Props) => (
-  <motion.a 
+  commentsCount,
+}: PostProps) => (
+  <motion.a
     className="post m-4 p-4"
     href={url}
     whileHover="hover"
@@ -59,23 +58,44 @@ const Post = ({
     rel="noopener noreferrer"
   >
     <div className="post-info">
-      <b className="post-author" data-testid="post-author"><small>{author}</small></b>
-      <small className="post-date" data-testid="post-date">{format(new Date(date), 'd MMM yyyy')}</small>
+      <b className="post-author" data-testid="post-author">
+        <small>{author}</small>
+      </b>
+      <small className="post-date" data-testid="post-date">
+        {format(new Date(date), 'd MMM yyyy')}
+      </small>
     </div>
-    <h2 className="post-title mb-3 mt-4 " data-testid="post-title">{title}</h2>
+    <h2 className="post-title mb-3 mt-4 " data-testid="post-title">
+      {title}
+    </h2>
     <div className="post-tags">
-      {tags.map((tag) => <small key={tag} className="post-tag mr-3  py-1 px-2" data-testid="post-tag">{tag}</small>)}
+      {tags.map((tag) => (
+        <small
+          key={tag}
+          className="post-tag mr-3  py-1 px-2"
+          data-testid="post-tag"
+        >
+          {tag}
+        </small>
+      ))}
     </div>
     <div className="post-footer mt-4">
-      <span className="post-reactions-count mr-5" data-testid="post-reactions-count">{reactionsCount} Likes</span>
-      <span className="post-comments-count" data-testid="post-comments-count">{commentsCount} Comments</span>
+      <span
+        className="post-reactions-count mr-5"
+        data-testid="post-reactions-count"
+      >
+        {reactionsCount} Likes
+      </span>
+      <span className="post-comments-count" data-testid="post-comments-count">
+        {commentsCount} Comments
+      </span>
     </div>
   </motion.a>
 );
 
 Post.defaultProps = {
   date: Date.now(),
-  tags: []
-}
+  tags: [],
+};
 
 export default Post;

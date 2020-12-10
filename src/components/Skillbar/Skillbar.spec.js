@@ -1,18 +1,17 @@
-import React from 'react';
 import { render } from '@testing-library/react';
 import Skillbar from './Skillbar';
 
 describe('Skillbar test section', () => {
   it('should be rendered', () => {
     // prepare
-    const { getByTestId } = render(<Skillbar />);
+    const { getByTestId } = render(<Skillbar value={8.2} />);
     // execute
     expect(getByTestId('skillbar')).toBeInTheDocument();
   });
-  
+
   it('should render a label', () => {
     // prepare
-    const { getByText } = render(<Skillbar label="Skillbar Label" />);
+    const { getByText } = render(<Skillbar value={8.2} label="Skillbar Label" />);
     // execute
     expect(getByText('Skillbar Label')).toBeInTheDocument();
   });
@@ -33,7 +32,7 @@ describe('Skillbar test section', () => {
 
   it('should receive classNames through the classList prop', () => {
     // prepare
-    const { getByTestId } = render(<Skillbar classList="test-class" />);
+    const { getByTestId } = render(<Skillbar value={8.2} classList="test-class" />);
     // execute
     expect(getByTestId('skillbar')).toHaveClass('test-class');
   });

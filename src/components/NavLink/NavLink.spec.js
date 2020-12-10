@@ -1,6 +1,4 @@
-import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
-import { Section } from 'components/Section';
+import { render } from '@testing-library/react';
 import NavLink from './NavLink';
 
 describe('NavLink test section', () => {
@@ -29,6 +27,6 @@ describe('NavLink test section', () => {
     // prepare
     const { getByTestId } = render(<NavLink to="test" />);
     // execute
-    expect(getByTestId('nav-link'))
+    expect(getByTestId('nav-link'));
   });
 });

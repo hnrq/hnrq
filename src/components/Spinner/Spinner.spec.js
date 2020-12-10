@@ -1,4 +1,3 @@
-import React from 'react';
 import { render } from '@testing-library/react';
 import Spinner from './Spinner';
 
@@ -7,7 +6,7 @@ describe('Spinner test section', () => {
     // prepare
     const { getByTestId } = render(<Spinner />);
     // execute
-    expect(getByTestId('spinner')).toBeInTheDocument
+    expect(getByTestId('spinner')).toBeInTheDocument();
   });
 
   it('should receive CSS classes through the classList prop.', () => {

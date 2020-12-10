@@ -14,19 +14,21 @@
 }
 
 @include keyframes(loading) {
-  0%, 30% {
-		transform-origin: 0 50%;
-	}
-	40%, 70% {
-		transform-origin: 100% 50%;		
-	}
-	40% {
-		transform: scaleX(1);
-	}
-	70% {
-		transform: scaleX(0);
+  0%,
+  30% {
+    transform-origin: 0 50%;
+  }
+  40%,
+  70% {
+    transform-origin: 100% 50%;
+  }
+  40% {
+    transform: scaleX(1);
+  }
+  70% {
+    transform: scaleX(0);
   }
   100% {
-		transform: scaleX(0);
-	}
+    transform: scaleX(0);
+  }
 }

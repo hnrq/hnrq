@@ -1,11 +1,11 @@
-@mixin animation($value){
+@mixin animation($value) {
   -webkit-animation: $value;
- -moz-animation: $value;
+  -moz-animation: $value;
   animation: $value;
 }
 
-@mixin keyframes($name){
-  @keyframes #{$name}{
+@mixin keyframes($name) {
+  @keyframes #{$name} {
     @content;
   }
   @-webkit-keyframes #{$name} {

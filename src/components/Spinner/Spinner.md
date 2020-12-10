@@ -1,9 +1,14 @@
 A loading spinner to be inserted on Loading
+
 ```jsx
-  <div style={{
+<div
+  style={{
     display: 'flex;',
     justifyContent: 'center',
     alignItems: 'center',
-    height: '100%'
-  }}><Spinner /></div>
+    height: '100%',
+  }}
+>
+  <Spinner />
+</div>
 ```

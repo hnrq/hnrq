@@ -1,5 +1,3 @@
-// @flow
-import React from 'react';
 import { Section } from 'components/Section';
 import { HomeContainer } from 'containers/HomeContainer';
 import { AboutContainer } from 'containers/AboutContainer';
@@ -22,7 +20,7 @@ const LandingPage = () => {
         <PostsContainer />
       </Section>
     </div>
-  )
+  );
 };
 
 export default LandingPage;

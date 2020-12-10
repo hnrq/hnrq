@@ -1,10 +1,14 @@
-import React from 'react';
+import { FC } from 'react';
 import { Post } from 'components/Post';
 
-const PostRenderer = ({ posts }) => (
+interface PostRendererProps {
+  posts: Array<{[key: string]: string}>
+}
+
+const PostRenderer: FC<PostRendererProps> = ({ posts }) => (
   <>
     {posts?.map((post) => (
-      <Post 
+      <Post
         title={post.title}
         key={post.id}
         url={post.url}

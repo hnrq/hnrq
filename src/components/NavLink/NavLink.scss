@@ -5,14 +5,14 @@
   position: relative;
   text-transform: uppercase;
   z-index: 1;
-  transition: cubic-bezier(0.6, -0.28, 0.735, 0.045) .2s color;
+  transition: cubic-bezier(0.6, -0.28, 0.735, 0.045) 0.2s color;
   &::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     z-index: -1;
-    transition: cubic-bezier(0.6, -0.28, 0.735, 0.045) .2s width;
+    transition: cubic-bezier(0.6, -0.28, 0.735, 0.045) 0.2s width;
     background-color: #ffffff;
     width: 0;
     height: 100%;

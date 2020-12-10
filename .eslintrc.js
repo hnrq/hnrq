@@ -3,7 +3,7 @@ module.exports = {
   settings: {
     react: {
       pragma: 'React',
-      version: '16.3',
+      version: '17.0.1',
     },
     'import/resolver': {
       node: {
@@ -22,6 +22,7 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'react/button-has-type': 'off',
     'react/no-multi-comp': 'off',
+    'react/react-in-jsx-scope': 'off',
     'react/jsx-one-expression-per-line': 'off',
     'react/jsx-filename-extension': 'off',
     'react/jsx-indent': 'off',
@@ -57,6 +58,7 @@ module.exports = {
         forbid: ['any'],
       },
     ],
+    'react/prop-types': 0,
     'react/jsx-boolean-value': 1,
     'react/jsx-closing-bracket-location': 0,
     'react/jsx-curly-spacing': 1,
@@ -77,16 +79,10 @@ module.exports = {
     'react/no-did-mount-set-state': 1,
     'react/no-did-update-set-state': 1,
     'react/no-direct-mutation-state': 1,
-    'react/no-multi-comp': 1,
     'react/no-set-state': 0,
-
     'react/no-unknown-property': 1,
     'react/prefer-es6-class': 1,
-    'react/prop-types': 1,
-    'react/react-in-jsx-scope': 1,
     'react/self-closing-comp': 1,
     'react/sort-comp': 1,
-  },
-  
-
+  }
 };
