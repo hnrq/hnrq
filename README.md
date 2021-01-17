@@ -2,4 +2,4 @@
 
 ## HNRQ
 
-This is my personal website, hosted at [hnrq.dev](hnrq.dev)
+This is my personal website, hosted at [hnrq.dev](https://hnrq.dev)
