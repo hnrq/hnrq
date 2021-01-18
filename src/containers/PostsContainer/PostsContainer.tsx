@@ -1,7 +1,6 @@
 import { 
   Suspense, 
   useState, 
-  lazy,
   useEffect, 
   useCallback 
 } from 'react';

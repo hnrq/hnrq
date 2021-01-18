@@ -6,9 +6,9 @@ type SkillbarProps = {
   /** Label to be rendered over the Skillbar */
   label: String,
   /** String or array of strings of classnames */
-  classList: Array<string> | string,
+  classList?: Array<string> | string,
   /** Skill value */
-  value: double,
+  value: number,
 };
 
 const Skillbar = ({ label, classList, value }: SkillbarProps) => (
@@ -25,7 +25,7 @@ const Skillbar = ({ label, classList, value }: SkillbarProps) => (
       y: { stiffness: 1000, velocity: -100 },
       duration: 2,
       ease: 'easeOut',
-      type: 'spring',
+      type: 'spring'
     }}
   >
     <div className="skillbar-info">

@@ -9,7 +9,7 @@ type PostProps = {
   /** Author of the post */
   author: string,
   /** Date when the post was published */
-  date?: Date,
+  date?: string,
   /** Post tags */
   tags: Array<string>,
   /** Number of reactions given to this post */

@@ -1,24 +1,23 @@
+import { FC } from 'react';
 import classNames from 'classnames';
 import { Link } from 'react-scroll';
 import './NavLink.scss';
 
 type NavLinkProps = {
-  // Children elements
-  children: React$Element<any>,
   // String array or single string of classNames
-  classList: Array<string> | string,
+  classList?: Array<string> | string,
   // NavLink destination
   to: string,
   // extra pixels to scroll
-  offset: number,
+  offset?: number,
 };
 
-const NavLink = ({ 
+const NavLink: FC<NavLinkProps> = ({ 
   children, 
   classList, 
   to, 
   offset 
-}: NavLinkProps) => (
+}) => (
   <Link
     to={to}
     smooth
