@@ -10,12 +10,14 @@ const LandingPage = () => {
   
   return (
     <div className="main-page">
-      <Section name="home" containerId="home" classList="home">
+      <Section name="home" containerId="home" revealOnScroll={false} classList="home">
         <HomeContainer />
       </Section>
+      <div className="section-spacing" />
       <Section name="about" containerId="about">
         <AboutContainer />
       </Section>
+      <div className="section-spacing" />
       <Section classList="posts" name="posts" containerId="posts">
         <PostsContainer />
       </Section>

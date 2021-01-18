@@ -46,7 +46,7 @@ const PostsContainer = () => {
           <h1 className="mt-0 mb-2">POSTS</h1>
           <hr />
         </div>
-        <motion.div
+        <div
           className="col-6 info ml-5 mt-4 posts"
           variants={postsVariants}
         >
@@ -70,7 +70,7 @@ const PostsContainer = () => {
               />
             ))}
           </Suspense>
-        </motion.div>
+        </div>
       </div>
     </motion.div>
   );

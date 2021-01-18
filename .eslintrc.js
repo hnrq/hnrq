@@ -1,5 +1,6 @@
 module.exports = {
   extends: ['react-app', 'airbnb'],
+  
   settings: {
     react: {
       pragma: 'React',
@@ -8,6 +9,7 @@ module.exports = {
     'import/resolver': {
       node: {
         paths: ['src'],
+        extensions: [".js", ".jsx", ".ts", ".tsx"]
       },
     },
   },
@@ -21,6 +23,7 @@ module.exports = {
   rules: {
     'import/prefer-default-export': 'off',
     'react/button-has-type': 'off',
+    'import/extensions': 'off',
     'react/no-multi-comp': 'off',
     'react/react-in-jsx-scope': 'off',
     'react/jsx-one-expression-per-line': 'off',

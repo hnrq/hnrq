@@ -1,6 +1,5 @@
 import './AboutContainer.scss';
 import { Skillbar } from 'components/Skillbar';
-import { motion } from 'framer-motion';
 import mediaLinks from 'assets/data/mediaLinks';
 
 const skills = [
@@ -23,12 +22,7 @@ const skills = [
 ];
 
 const AboutContainer = () => (
-  <motion.div
-    animate={{ opacity: 1 }}
-    initial={{ opacity: 0 }}
-    transition={{ duration: 0.5 }}
-    className="about-container"
-  >
+  <div className="about-container">
     <div className="row mt-6">
       <div className="col-6 title">
         <h1 className="mt-0 mb-2">ABOUT</h1>
@@ -64,23 +58,7 @@ const AboutContainer = () => (
           )}
         </div>
       </div>
-      <motion.div
-        className="col-6 skills"
-        variants={{
-          show: {
-            opacity: 1,
-            transition: {
-              staggerChildren: 0.7,
-              delayChildren: 0.5,
-            },
-          },
-          hidden: {
-            opacity: 0,
-          },
-        }}
-        initial="hidden"
-        animate="show"
-      >
+      <div className="col-6 skills">
         {skills.map(({ label, value }) => (
           <Skillbar
             label={label}
@@ -89,7 +67,7 @@ const AboutContainer = () => (
             value={value}
           />
         ))}
-      </motion.div>
+      </div>
 
       <div className="pl-5 col-6 text">
         <h4 className="mt-0 mb-3">Bio:</h4>
@@ -111,7 +89,7 @@ const AboutContainer = () => (
         </p>
       </div>
     </div>
-  </motion.div>
+  </div>
 );
 
 export default AboutContainer;

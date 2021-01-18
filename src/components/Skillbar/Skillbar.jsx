@@ -15,7 +15,7 @@ const Skillbar = ({ label, classList, value }: SkillbarProps) => (
   <motion.div
     data-testid="skillbar"
     variants={{
-      hidden: { y: 100, opacity: 0 },
+      hidden: { y: 50, opacity: 0 },
       show: { y: 0, opacity: 1 },
     }}
     initial="hidden"
