@@ -27,6 +27,8 @@
     overflow: auto;
     border: 2px solid white;
     box-sizing: border-box;
+    display: flex;
+    align-items: stretch;
     align-self: stretch;
     @include phone-only {
       padding: 0;

@@ -7,9 +7,8 @@ import {
 } from 'react';
 import { Spinner } from 'components/Spinner';
 import { motion } from 'framer-motion';
+import { Post } from 'components/Post';
 import './PostsContainer.scss';
-
-const PostRenderer = lazy(() => import('./PostRenderer'));
 
 const postsVariants = {
   show: {
@@ -58,7 +57,18 @@ const PostsContainer = () => {
               </div>
             )}
           >
-            <PostRenderer posts={posts} />
+            {posts?.map((post) => (
+              <Post
+                title={post.title}
+                key={post.id}
+                url={post.url}
+                author={post.user.name}
+                date={post.published_at}
+                tags={post.tag_list}
+                reactionsCount={post.public_reactions_count}
+                commentsCount={post.comments_count}
+              />
+            ))}
           </Suspense>
         </motion.div>
       </div>
