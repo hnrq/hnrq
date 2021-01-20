@@ -6,8 +6,6 @@ import './Post.scss';
 type PostProps = {
   /** Title of the post */
   title: string,
-  /** Author of the post */
-  author: string,
   /** Date when the post was published */
   date?: string,
   /** Post tags */
@@ -40,14 +38,13 @@ const variants = {
 const Post = ({
   title,
   url,
-  author,
   date,
   tags,
   reactionsCount,
   commentsCount,
 }: PostProps) => (
   <motion.a
-    className="post m-4 p-4"
+    className="post p-4"
     href={url}
     whileHover="hover"
     initial="hidden"
@@ -58,9 +55,6 @@ const Post = ({
     rel="noopener noreferrer"
   >
     <div className="post-info">
-      <b className="post-author" data-testid="post-author">
-        <small>{author}</small>
-      </b>
       <small className="post-date" data-testid="post-date">
         {format(new Date(date), 'd MMM yyyy')}
       </small>

@@ -2,6 +2,12 @@
 @import '~assets/scss/queries';
 
 .about-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 2rem;
+  @include phone-only {
+    display: block;
+  }
   & a {
     font-weight: bold;
   }
@@ -16,6 +22,7 @@
     line-height: 1.5;
   }
   & .info {
+    justify-content: center;
     font-family: 'B612 Mono', monospace;
   }
   & .title {

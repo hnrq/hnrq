@@ -1,4 +1,5 @@
 @import '~assets/scss/variables';
+@import '~assets/scss/queries';
 
 .post {
   display: block;
@@ -6,6 +7,9 @@
   text-decoration: none;
   color: white;
   transition: ease-in 0.2s;
+  @include phone-only {
+    margin: map-get($spacers, 4) 0;
+  }
   & .post-info {
     display: flex;
     flex-direction: column;
