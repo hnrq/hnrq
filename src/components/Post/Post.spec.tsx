@@ -7,7 +7,6 @@ describe('Post test section', () => {
     const { getByTestId } = render(
       <Post 
         title="Example post" 
-        author="John Doe"
         date="2020-07-27T16:17:42Z"
         tags={['tag1', 'tag2']}
         reactionsCount={13}
@@ -23,7 +22,6 @@ describe('Post test section', () => {
     const { getByTestId } = render(
       <Post 
         title="Example post" 
-        author="John Doe"
         date="2020-07-27T16:17:42Z"
         tags={['tag1', 'tag2']}
         reactionsCount={13}
@@ -34,28 +32,11 @@ describe('Post test section', () => {
     // execute
     expect(getByTestId('post-title').textContent).toBe('Example post');
   });
-  it('should render the author.', () => {
-    // prepare
-    const { getByTestId } = render(
-      <Post 
-        title="Example post" 
-        author="John Doe"
-        date="2020-07-27T16:17:42Z"
-        tags={['tag1', 'tag2']}
-        reactionsCount={13}
-        commentsCount={2}
-        url="https://dev.to/"
-      />
-    );
-    // execute
-    expect(getByTestId('post-author').textContent).toBe('John Doe');
-  });
   it('should render the date.', () => {
     // prepare
     const { getByTestId } = render(
       <Post 
         title="Example post" 
-        author="John Doe"
         date="2020-07-27T16:17:42Z"
         tags={['tag1', 'tag2']}
         reactionsCount={13}
@@ -71,7 +52,6 @@ describe('Post test section', () => {
     const { getAllByTestId } = render(
       <Post 
         title="Example post" 
-        author="John Doe"
         date="2020-07-27T16:17:42Z"
         tags={['tag1', 'tag2', 'tag3']}
         reactionsCount={13}
@@ -87,7 +67,6 @@ describe('Post test section', () => {
     const { getByTestId } = render(
       <Post 
         title="Example post" 
-        author="John Doe"
         date="2020-07-27T16:17:42Z"
         tags={['tag1', 'tag2']}
         reactionsCount={13}
@@ -103,7 +82,6 @@ describe('Post test section', () => {
     const { getByTestId } = render(
       <Post 
         title="Example post" 
-        author="John Doe"
         date="2020-07-27T16:17:42Z"
         tags={['tag1', 'tag2']}
         reactionsCount={13}
