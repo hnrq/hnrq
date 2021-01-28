@@ -20,4 +20,4 @@ This was a small experiment using framer motion to test route transitions. I cre
 Workout is a native Android app, built using Java. It is supposed to be an app to help keeping track of your exercise charts, you can create, edit, delete and share them through links or QR code with other people. This is a very nice project that I intend to remake it using Flutter in the future.
 
 ### [rich-text-editor](https://github.com/hnrq/rich-text-editor)
-This is a test of two of the most popular rich text editor frameworks: Slate.js and Draft.js. The result can be seen [here](https://hnrq.github.io/rich-text-editor).
+This is a test of two of the most popular rich text editor frameworks: Slate.js and Draft.js. The result can be seen [here](https://slate-editor.herokuapp.com/#/slate).
