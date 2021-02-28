@@ -2,6 +2,13 @@
 
 My name is Henrique Ramos, I'm 21 and I live in [Belo Horizonte, Minas Gerais, Brazil](https://goo.gl/maps/ydd9TSyMcLFzpgbv9). I'm a Software Engineering undergraduate at PUC Minas and a Front-end developer. In my spare time, I like to play Dota 2, read about UI/UX Design (Which, in my opinion, is an important trait for a Front-end dev) and about new community trends and sometimes I write articles on [dev.to](https://dev.to/hnrq).
 
+
+<p align="center">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/top-langs?username=hnrq&show_icons=true&layout=compact&locale=en&theme=dark" height="175" alt="Chart containing my top languages" style="margin-right: 2rem;" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img align="center" src="https://github-readme-stats.vercel.app/api?username=hnrq&show_icons=true&locale=en&layout=compact&theme=dark" height="175" alt="" />
+</p>
+
 ## My Website
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/c9cb4ce1-e706-454b-8169-d52fb4719e59/deploy-status)](https://hnrq.dev/)
