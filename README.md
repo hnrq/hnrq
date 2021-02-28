@@ -4,9 +4,9 @@ My name is Henrique Ramos, I'm 21 and I live in [Belo Horizonte, Minas Gerais, B
 
 
 <p align="center">
-  <img align="center" src="https://github-readme-stats.vercel.app/api/top-langs?username=hnrq&show_icons=true&layout=compact&locale=en&theme=dark" height="175" alt="Chart containing my top languages" style="margin-right: 2rem;" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <img align="center" src="https://github-readme-stats.vercel.app/api?username=hnrq&show_icons=true&locale=en&layout=compact&theme=dark" height="175" alt="" />
+  <img align="center" src="https://github-readme-stats.vercel.app/api/top-langs?username=hnrq&show_icons=true&layout=compact&locale=en&theme=dark" height="150" alt="Chart containing my top languages" style="margin-right: 2rem;" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img align="center" src="https://github-readme-stats.vercel.app/api?username=hnrq&show_icons=true&locale=en&layout=compact&theme=dark" height="150" alt="" />
 </p>
 
 ## My Website
