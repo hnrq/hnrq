@@ -23,8 +23,6 @@ const Icosahedron = ({ classList }: Props) => {
 
   const handleWindowResize = useCallback(() => {
     const size = window.innerWidth > 500 ? 500 : window.innerWidth - 50;
-    camera.aspect = 1;
-    camera.updateProjectionMatrix();
     renderer.setSize(size, size);
     effect.setSize(size, size);
   }, [renderer, effect, camera]);
@@ -36,7 +34,10 @@ const Icosahedron = ({ classList }: Props) => {
     const firstLight = new THREE.PointLight(0xffffff);
     firstLight.position.set(500, 500, 500);
     scene.add(firstLight);
-
+    camera.aspect = 1;
+    camera.updateProjectionMatrix();
+    renderer.setSize(500, 500);
+    effect.setSize(500, 500);
     const secondLight = new THREE.PointLight(0xffffff, 0.25);
     secondLight.position.set(-500, -500, -500);
     scene.add(secondLight);
@@ -46,14 +47,11 @@ const Icosahedron = ({ classList }: Props) => {
       new THREE.MeshPhongMaterial()
     );
     scene.add(mesh);
-    const start = Date.now();
-
-    handleWindowResize();
     const controls = new OrbitControls(camera, effect.domElement);
     controls.enableZoom = false;
+    controls.enablePan = false;
     effect.domElement.style.color = 'white';
-    effect.domElement.style.backgroundColor = 'black';
-
+    const start = Date.now();
     const render = () => {
       const timer = Date.now() - start;
       mesh.rotation.x = timer * 0.0003;
@@ -69,9 +67,9 @@ const Icosahedron = ({ classList }: Props) => {
     threeRef.current.appendChild(effect.domElement);
     window.addEventListener('resize', handleWindowResize, false);
     animate();
-
+    
     return () => window.removeEventListener('resize', handleWindowResize);
-  }, [camera, renderer, scene, handleWindowResize, effect]);
+  }, []);
 
   return (
     <div

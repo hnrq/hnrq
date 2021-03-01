@@ -1,12 +1,16 @@
 import { useEffect } from 'react';
-import './App.scss';
 import { LandingPage } from 'pages/LandingPage';
 import { Header } from 'containers/Header';
 import ReactGA from 'react-ga';
+import './App.scss';
 
 const App = () => {
   useEffect(() => {
-    ReactGA.initialize('UA-178053844-1');
+    var host = window.location.hostname;
+    if (host !== "localhost") {
+      ReactGA.initialize('UA-000000-01');
+      ReactGA.pageview(window.location.pathname);
+    }
   }, []);
 
   return (
