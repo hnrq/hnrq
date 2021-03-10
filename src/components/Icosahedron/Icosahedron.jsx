@@ -22,7 +22,7 @@ const Icosahedron = ({ classList }: Props) => {
   const scene = useCallback(new THREE.Scene(), []);
 
   const handleWindowResize = useCallback(() => {
-    const size = window.innerWidth > 500 ? 500 : window.innerWidth - 50;
+    const size = Math.min(500, window.innerWidth - 50);
     renderer.setSize(size, size);
     effect.setSize(size, size);
   }, [renderer, effect, camera]);
@@ -36,8 +36,7 @@ const Icosahedron = ({ classList }: Props) => {
     scene.add(firstLight);
     camera.aspect = 1;
     camera.updateProjectionMatrix();
-    renderer.setSize(500, 500);
-    effect.setSize(500, 500);
+    handleWindowResize();
     const secondLight = new THREE.PointLight(0xffffff, 0.25);
     secondLight.position.set(-500, -500, -500);
     scene.add(secondLight);

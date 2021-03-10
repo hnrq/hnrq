@@ -6,8 +6,7 @@ import './App.scss';
 
 const App = () => {
   useEffect(() => {
-    var host = window.location.hostname;
-    if (host !== "localhost") {
+    if (window.location.hostname !== "localhost") {
       ReactGA.initialize('UA-000000-01');
       ReactGA.pageview(window.location.pathname);
     }
