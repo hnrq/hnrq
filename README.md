@@ -1,6 +1,6 @@
 # Hey, mate!
 
-My name is Henrique Ramos, I'm 21 and I live in [Belo Horizonte, Minas Gerais, Brazil](https://goo.gl/maps/ydd9TSyMcLFzpgbv9). I'm a Software Engineering undergraduate at PUC Minas and a Front-end developer. In my spare time, I like to play Dota 2, read about UI/UX Design (Which, in my opinion, is an important trait for a Front-end dev) and about new community trends and sometimes I write articles on [dev.to](https://dev.to/hnrq).
+My name is Henrique Ramos, I'm 21 and I live in [Belo Horizonte, Minas Gerais, Brazil](https://goo.gl/maps/ydd9TSyMcLFzpgbv9). I'm a Software Engineering undergraduate at PUC Minas and a Front-end developer. In my spare time, I like to play Dota 2, read about UI/UX Design (Which, in my opinion, is an important trait for a Front-end dev) and about new community trends and sometimes I write articles on [dev.to](https://dev.to/hnrq). I want to become a Creative Developer someday, so I'm currently studying a lot about WebGL, Three.js and 3D modeling.
 
 
 <p align="center">
