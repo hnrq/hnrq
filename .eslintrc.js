@@ -1,6 +1,6 @@
 module.exports = {
-  extends: ['react-app', 'airbnb'],
-  
+  extends: ['react-app', 'airbnb', 'prettier'],
+
   settings: {
     react: {
       pragma: 'React',
@@ -9,7 +9,7 @@ module.exports = {
     'import/resolver': {
       node: {
         paths: ['src'],
-        extensions: [".js", ".jsx", ".ts", ".tsx"]
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
       },
     },
   },
@@ -87,5 +87,5 @@ module.exports = {
     'react/prefer-es6-class': 1,
     'react/self-closing-comp': 1,
     'react/sort-comp': 1,
-  }
+  },
 };
