@@ -1,5 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useRef, useCallback } from 'react';
+import { 
+  useEffect, 
+  useRef, 
+  useMemo, 
+  useCallback
+} from 'react';
 import { AsciiEffect } from 'three/examples/jsm/effects/AsciiEffect';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import * as THREE from 'three';
@@ -13,13 +18,13 @@ type Props = {
 
 const Icosahedron = ({ classList }: Props) => {
   const threeRef = useRef(null);
-  const renderer = useCallback(new THREE.WebGLRenderer(), []);
-  const camera = useCallback(new THREE.PerspectiveCamera(70, 1, 1, 500), []);
-  const effect = useCallback(
-    new AsciiEffect(renderer, ' .:-+*=%@#', { invert: true }),
+  const renderer = useMemo(() => new THREE.WebGLRenderer(), []);
+  const camera = useMemo(() => new THREE.PerspectiveCamera(70, 1, 1, 500), []);
+  const effect = useMemo(
+    () => new AsciiEffect(renderer, ' .:-+*=%@#', { invert: true }),
     []
   );
-  const scene = useCallback(new THREE.Scene(), []);
+  const scene = useMemo(() => new THREE.Scene(), []);
 
   const handleWindowResize = useCallback(() => {
     const size = Math.min(500, window.innerWidth - 50);
@@ -43,7 +48,7 @@ const Icosahedron = ({ classList }: Props) => {
 
     const mesh = new THREE.Mesh(
       new THREE.IcosahedronBufferGeometry(275),
-      new THREE.MeshPhongMaterial()
+      new THREE.MeshLambertMaterial()
     );
     scene.add(mesh);
     const controls = new OrbitControls(camera, effect.domElement);
@@ -66,7 +71,7 @@ const Icosahedron = ({ classList }: Props) => {
     threeRef.current.appendChild(effect.domElement);
     window.addEventListener('resize', handleWindowResize, false);
     animate();
-    
+
     return () => window.removeEventListener('resize', handleWindowResize);
   }, []);
 

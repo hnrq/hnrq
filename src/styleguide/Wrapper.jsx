@@ -1,4 +1,3 @@
-
 type WrapperProps = {
   /** Child component */
   children: Array<React.Element<any>>,
