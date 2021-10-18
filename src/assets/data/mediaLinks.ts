@@ -5,5 +5,5 @@ export default {
   linkedin: 'www.linkedin.com/in/hnriq',
   deviantArt: 'https://deviantart.com/alberoneramos',
   devTo: 'https://dev.to/hnrq',
-  instagram: 'https://instagram.com/alberoneramos'
+  instagram: 'https://instagram.com/hnrq.zip'
 };
