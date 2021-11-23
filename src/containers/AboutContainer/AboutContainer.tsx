@@ -5,15 +5,15 @@ import mediaLinks from 'assets/data/mediaLinks';
 const skills = [
   {
     label: 'Javascript',
-    value: 8.6,
+    value: 7.5,
   },
   {
     label: 'React.js',
-    value: 8.3,
+    value: 7.2,
   },
   {
     label: 'CSS',
-    value: 7.4,
+    value: 6.6,
   },
   {
     label: 'Flutter',
