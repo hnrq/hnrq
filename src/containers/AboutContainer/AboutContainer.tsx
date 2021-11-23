@@ -70,8 +70,8 @@ const AboutContainer = () => (
       <h4 className="mt-0 mb-3">Bio:</h4>
       <p className="mt-0">
         Software Engineer who spends his spare time trying to learn
-        something new about Web and Mobile Development and UI/UX design,
-        editing videos, muddling through Illustrator and losing his sanity
+        something new about Web, Mobile Development and UI/UX design. Likes
+        video editing, muddling through Illustrator and loses his sanity
         while playing Dota 2. Also writes about his programming
         misadventures on{' '}
         <a
