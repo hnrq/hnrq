@@ -1,0 +1,15 @@
+@use '../utils';
+
+.container {
+	position: relative;
+	margin: 0 auto;
+	max-width: map-get(utils.$breakpoints, 'md');
+	display: flex;
+	flex-direction: column;
+	padding: 0;
+	box-sizing: border-box;
+	@include utils.breakpoint-down('sm') {
+		margin-left: utils.spacing(2);
+		margin-right: utils.spacing(2);
+	}
+}
