@@ -3,7 +3,7 @@
 	import Section from '@src/layout/Section.svelte';
 </script>
 
-<Section>
+<Section id="/" style="height: calc(100vh - 132px);" revealOnScroll>
 	<div class="home container">
 		<div class="home__title">
 			<h1 class="title--reveal">WRITING</h1>
@@ -35,8 +35,7 @@
 		grid-template: auto 1fr / 1fr auto;
 		position: relative;
 		height: 100%;
-		padding-top: utils.spacing(12);
-		padding-bottom: utils.spacing(6);
+		padding: utils.spacing(6) 0;
 
 		&__footer {
 			display: flex;
@@ -61,6 +60,9 @@
 		}
 
 		&__title {
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
 			margin: auto 0;
 			@include utils.breakpoint-down('sm') {
 				margin-top: utils.spacing(4);
@@ -96,12 +98,11 @@
 		}
 
 		& .title--reveal {
+			display: inline-block;
 			position: relative;
 			z-index: 1;
 			margin: 0 0 utils.spacing(1) 0;
 			letter-spacing: utils.spacing(1);
-			font-family: var(--header-font);
-			font-size: 4rem;
 			animation-name: clip-text;
 			white-space: nowrap;
 			cursor: default;

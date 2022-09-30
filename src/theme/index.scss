@@ -1,10 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=B612+Mono&family=Montserrat:wght@100;200;300;400;500;600;700&display=swap');
 
 :root {
-	--primary-color: white;
-	--text-color: white;
 	--base-spacing: 8px;
-	--background-color: black;
 	--body-font: 'B612 Mono', monospace;
 	--header-font: 'Montserrat', sans-serif;
+	scroll-behavior: smooth;
+}
+
+html {
+	&.dark {
+		--primary-color: white;
+		--text-color: white;
+		--background-color: black;
+	}
+	&.light {
+		--primary-color: black;
+		--text-color: black;
+		--background-color: white;
+	}
+}
+
+h1 {
+	font-family: var(--header-font);
+	font-size: 4rem;
 }

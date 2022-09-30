@@ -1,5 +1,6 @@
-<script>
+<script lang="ts">
 	import Link from '@src/components/Link.svelte';
+	import theme from '@src/store/theme';
 </script>
 
 <header class="header">
@@ -11,6 +12,12 @@
 		<Link href="/#about">About</Link>
 		<Link href="/#posts">Posts</Link>
 	</nav>
+	<span
+		class="header__theme-toggle"
+		on:click={() => theme.update((curr) => (curr === 'dark' ? 'light' : 'dark'))}
+	>
+		TURN {#if $theme === 'dark'}ON{:else}OFF{/if}
+	</span>
 </header>
 
 <style lang="scss">
@@ -20,11 +27,10 @@
 		padding-top: utils.spacing(3);
 		padding-bottom: utils.spacing(2);
 		gap: utils.spacing(1.5);
-		position: fixed;
+		position: sticky;
 		display: flex;
 		z-index: 2;
 		top: 0;
-		height: 100px;
 		box-sizing: border-box;
 		justify-items: center;
 		flex-direction: column;
@@ -39,6 +45,10 @@
 
 		&__logo {
 			font-size: 1.2rem;
+		}
+
+		&__theme-toggle {
+			cursor: pointer;
 		}
 	}
 </style>
