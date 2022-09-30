@@ -28,7 +28,10 @@
 			scene.background = new THREE.Color(0, 0, 0);
 			const firstLight = new THREE.PointLight(0xffffff);
 			firstLight.position.set(500, 500, 500);
+			const secondLight = new THREE.PointLight(0xffffff);
+			secondLight.position.set(-500, -500, -500);
 			scene.add(firstLight);
+			scene.add(secondLight);
 			camera.aspect = 1;
 			camera.updateProjectionMatrix();
 			handleWindowResize();
@@ -41,7 +44,6 @@
 			const controls = new OrbitControls(camera, effect.domElement);
 			controls.enableZoom = false;
 			controls.enablePan = false;
-			effect.domElement.style.color = 'white';
 			const start = Date.now();
 			const render = () => {
 				const timer = Date.now() - start;
@@ -71,5 +73,6 @@
 		box-sizing: content-box;
 		display: inline-block;
 		margin: 0;
+		color: var(--text-color);
 	}
 </style>
