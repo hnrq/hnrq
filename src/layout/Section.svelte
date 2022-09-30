@@ -5,8 +5,10 @@
 
 	import { browser } from '$app/environment';
 
-	let id: string;
-	let revealOnScroll = false;
+	export let style = '';
+	export let id: string;
+	export let revealOnScroll = false;
+
 	let ref: HTMLElement;
 	let visible = !revealOnScroll;
 
@@ -17,26 +19,29 @@
 				visible = entry.isIntersecting;
 			};
 			const intersectionObserver = new IntersectionObserver(intersectionCallback, {
-				threshold: 0.3,
-				rootMargin: '-100'
+				threshold: 0.2,
+				rootMargin: '-100px'
 			});
 			intersectionObserver.observe(ref);
 		}
 	});
 </script>
 
-<section {id} bind:this={ref} class="section">
+<section {id} {style} bind:this={ref} class="section">
 	{#if visible}
-		<div transition:fade={{ duration: 500 }} class="section__container">
+		<div transition:fade={{ duration: 500, delay: 200 }} class="section__container">
 			<slot />
 		</div>
 	{/if}
 </section>
 
 <style lang="scss">
+	@use '@src/theme/utils';
+
 	.section {
 		height: 100vh;
 		width: 100%;
+		scroll-margin-top: utils.spacing(12);
 		&__container {
 			height: 100%;
 			width: 100%;
