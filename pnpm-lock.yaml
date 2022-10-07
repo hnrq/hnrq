@@ -21,7 +21,6 @@ specifiers:
   sass: ^1.55.0
   svelte: ^3.44.0
   svelte-check: ^2.7.1
-  svelte-htm: ^1.1.1
   svelte-preprocess: ^4.10.6
   three: ^0.144.0
   tslib: ^2.3.1
@@ -35,7 +34,7 @@ dependencies:
 devDependencies:
   '@faker-js/faker': 7.5.0
   '@sveltejs/adapter-auto': 1.0.0-next.80
-  '@sveltejs/kit': 1.0.0-next.505_svelte@3.50.1+vite@3.1.4
+  '@sveltejs/kit': 1.0.0-next.506_svelte@3.50.1+vite@3.1.4
   '@testing-library/jest-dom': 5.16.5
   '@testing-library/svelte': 3.2.1_svelte@3.50.1
   '@types/testing-library__jest-dom': 5.14.5
@@ -53,7 +52,6 @@ devDependencies:
   sass: 1.55.0
   svelte: 3.50.1
   svelte-check: 2.9.1_sass@1.55.0+svelte@3.50.1
-  svelte-htm: 1.1.1_svelte@3.50.1
   svelte-preprocess: 4.10.7_hfbjjxm4ggy2hdppiwxlv6aafa
   tslib: 2.4.0
   typescript: 4.8.4
@@ -85,14 +83,6 @@ packages:
       '@babel/helper-validator-identifier': 7.19.1
       chalk: 2.4.2
       js-tokens: 4.0.0
-    dev: true
-
-  /@babel/runtime-corejs3/7.19.1:
-    resolution: {integrity: sha512-j2vJGnkopRzH+ykJ8h68wrHnEUmtK//E723jjixiAl/PPf6FhqY/vYRcMVlNydRKQjQsTsYEjpx+DZMIvnGk/g==}
-    engines: {node: '>=6.9.0'}
-    dependencies:
-      core-js-pure: 3.25.3
-      regenerator-runtime: 0.13.9
     dev: true
 
   /@babel/runtime/7.19.0:
@@ -308,8 +298,8 @@ packages:
       - supports-color
     dev: true
 
-  /@sveltejs/kit/1.0.0-next.505_svelte@3.50.1+vite@3.1.4:
-    resolution: {integrity: sha512-vg2WvWiUB7useJZOKbdM8WOXv10WD7SVDER74IXd1t/TWb/uXHzwMQ/ZAsXZFdxQsz1cDGFub3iC76PW+j58Pg==}
+  /@sveltejs/kit/1.0.0-next.506_svelte@3.50.1+vite@3.1.4:
+    resolution: {integrity: sha512-OF5CVzXeLvqJGZz18CzscSkacTXYWdUPAGuvyiCApndowUzUX/x9jwuMbh6xfmUC4wVbC139rFwoMHQK6QZmzw==}
     engines: {node: '>=16.14'}
     hasBin: true
     requiresBuild: true
@@ -966,16 +956,6 @@ packages:
   /cookie/0.5.0:
     resolution: {integrity: sha512-YZ3GUyn/o8gfKJlnlX7g7xq4gyO6OSuhGPKaaGssGB2qgDUS0gPgtTvoyZLTt9Ab6dC4hfc9dV5arkvc/OCmrw==}
     engines: {node: '>= 0.6'}
-    dev: true
-
-  /core-js-pure/3.25.3:
-    resolution: {integrity: sha512-T/7qvgv70MEvRkZ8p6BasLZmOVYKzOaWNBEHAU8FmveCJkl4nko2quqPQOmy6AJIp5MBanhz9no3A94NoRb0XA==}
-    requiresBuild: true
-    dev: true
-
-  /core-js/3.25.3:
-    resolution: {integrity: sha512-y1hvKXmPHvm5B7w4ln1S4uc9eV/O5+iFExSRUimnvIph11uaizFR8LFMdONN8hG3P2pipUfX4Y/fR8rAEtcHcQ==}
-    requiresBuild: true
     dev: true
 
   /core-util-is/1.0.3:
@@ -1914,10 +1894,6 @@ packages:
   /he/1.2.0:
     resolution: {integrity: sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==}
     hasBin: true
-    dev: true
-
-  /htm/3.1.1:
-    resolution: {integrity: sha512-983Vyg8NwUE7JkZ6NmOqpCZ+sh1bKv2iYTlUkzlWmA5JD2acKoxd4KVxbMmxX/85mtfdnDmTFoNKcg5DGAvxNQ==}
     dev: true
 
   /http-basic/8.1.3:
@@ -2980,46 +2956,12 @@ packages:
       - sugarss
     dev: true
 
-  /svelte-fragment-component/1.2.0_svelte@3.50.1:
-    resolution: {integrity: sha512-rRstmz2oAy2Y/7X57tRaIAJdMYsa2K/MOx/YJN/ETb7Bj9U3vjgioz27dMG1hl2vAKFTtQpxDhC31ur7ECwpog==}
-    engines: {node: '>=10'}
-    peerDependencies:
-      svelte: 3.x
-    dependencies:
-      svelte: 3.50.1
-    dev: true
-
   /svelte-hmr/0.15.0_svelte@3.50.1:
     resolution: {integrity: sha512-Aw21SsyoohyVn4yiKXWPNCSW2DQNH/76kvUnE9kpt4h9hcg9tfyQc6xshx9hzgMfGF0kVx0EGD8oBMWSnATeOg==}
     engines: {node: ^12.20 || ^14.13.1 || >= 16}
     peerDependencies:
       svelte: '>=3.19.0'
     dependencies:
-      svelte: 3.50.1
-    dev: true
-
-  /svelte-htm/1.1.1_svelte@3.50.1:
-    resolution: {integrity: sha512-fd0LaeDvJJgZFZQJA1Q5PQk+/wKTbxYQLIMv+115enofYmpZgXPD8C7YnRChSpcaxCbqHvZNA10zk4BBaPz4xw==}
-    engines: {node: '>=10'}
-    peerDependencies:
-      svelte: 3.x
-    dependencies:
-      '@babel/runtime-corejs3': 7.19.1
-      core-js: 3.25.3
-      htm: 3.1.1
-      svelte: 3.50.1
-      svelte-fragment-component: 1.2.0_svelte@3.50.1
-      svelte-hyperscript: 1.2.1_svelte@3.50.1
-    dev: true
-
-  /svelte-hyperscript/1.2.1_svelte@3.50.1:
-    resolution: {integrity: sha512-IVk91VDSOrhOUe0KI+Jfu7yCruUTOXgr4WysrK7hBNbFMDjeBOcPhk+LMYjUjdWxJx3+QSt3bUXj09YrUfRkjg==}
-    engines: {node: '>=10'}
-    peerDependencies:
-      svelte: 3.x
-    dependencies:
-      '@babel/runtime-corejs3': 7.19.1
-      core-js: 3.25.3
       svelte: 3.50.1
     dev: true
 

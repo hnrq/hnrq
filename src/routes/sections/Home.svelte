@@ -3,7 +3,7 @@
 	import Section from '@src/layout/Section.svelte';
 </script>
 
-<Section id="/" style="height: calc(100vh - 132px);" revealOnScroll>
+<Section id="" style={`height: calc(100vh - 132px);`}>
 	<div class="home container">
 		<div class="home__title">
 			<h1 class="title--reveal">WRITING</h1>
@@ -32,10 +32,10 @@
 	.home {
 		height: 100%;
 		display: grid;
-		grid-template: auto 1fr / 1fr auto;
+		grid-template: auto 1fr / 50% 50%;
 		position: relative;
 		height: 100%;
-		padding: utils.spacing(6) 0;
+		align-content: space-around;
 
 		&__footer {
 			display: flex;

@@ -18,7 +18,6 @@
 
 	.skillbar {
 		display: grid;
-		row-gap: utils.spacing(1);
 		grid-template: 2fr / 2fr;
 		box-sizing: border-box;
 		font-family: var(--body-font);
@@ -36,12 +35,12 @@
 			border: $border-width solid var(--primary-color);
 			position: relative;
 			box-sizing: border-box;
-			height: utils.spacing(5);
+			height: utils.spacing(4);
 			width: 100%;
 		}
 
 		&__bar {
-			height: utils.spacing(5);
+			height: utils.spacing(4);
 			position: absolute;
 			left: -#{calc($border-width / 2)};
 			top: -#{calc($border-width)};
