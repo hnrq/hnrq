@@ -7,7 +7,6 @@
 	import { browser } from '$app/environment';
 
 	let ref: HTMLElement;
-	const icosahedronWidth = 500;
 
 	onMount(async () => {
 		if (browser) {
@@ -18,7 +17,7 @@
 			const effect = new AsciiEffect(renderer, ' .:-+*=%@#', { invert: true });
 			const scene = new THREE.Scene();
 			const handleWindowResize = () => {
-				const size = Math.min(icosahedronWidth, window.innerWidth - 50);
+				const size = ref?.getBoundingClientRect().width - 50 || 400;
 				renderer.setSize(size, size);
 				effect.setSize(size, size);
 			};
@@ -65,7 +64,7 @@
 	});
 </script>
 
-<div class="icosahedron" bind:this={ref} style={`max-width: ${icosahedronWidth}`} />
+<div class="icosahedron" bind:this={ref} />
 
 <style lang="scss">
 	.icosahedron {
@@ -74,5 +73,6 @@
 		display: inline-block;
 		margin: 0;
 		color: var(--text-color);
+		width: 100%;
 	}
 </style>
