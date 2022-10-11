@@ -15,15 +15,15 @@ describe('<Post />', () => {
 		['title', post.title],
 		[
 			'date',
-			new Date(post.date).toLocaleDateString('en', {
+			new Date(post['published_at']).toLocaleDateString('en', {
 				day: 'numeric',
 				month: 'short',
 				year: 'numeric'
 			})
 		],
-		['tags', post.tags.map((tag) => `#${tag}`).join(' ')],
-		['reactions count', `${post.reactionsCount} likes`],
-		['comments count', `${post.commentsCount} comments`]
+		['tags', post.tag_list.map((tag) => `#${tag}`).join(' ')],
+		['reactions count', `${post.public_reactions_count} likes`],
+		['comments count', `${post.comments_count} comments`]
 	])('renders the %s', (_field, query) => {
 		const { getByText } = render(Post, { post });
 		expect(getByText(query)).toBeInTheDocument();

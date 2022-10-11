@@ -1,12 +1,11 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
 	import { page } from '$app/stores';
 
 	export let href: string;
 
 	let active = false;
 
-	$: if (browser) {
+	$: {
 		active = $page.url.href.replace($page.url.origin, '') === href;
 	}
 </script>

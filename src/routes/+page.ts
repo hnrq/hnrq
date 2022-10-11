@@ -1,9 +1,7 @@
 import type Post from '@src/types/Post';
-import type { ServerLoad } from '@sveltejs/kit';
+import type { Load } from '@sveltejs/kit';
 
-export const prerender = true;
-
-export const load: ServerLoad<
+export const load: Load<
 	Record<string, string>,
 	Record<string, string>,
 	{ posts: Post[] }
