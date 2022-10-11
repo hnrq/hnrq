@@ -8,7 +8,7 @@
 	flex-direction: column;
 	padding: 0;
 	box-sizing: border-box;
-	@include utils.breakpoint-down('sm') {
+	@include utils.breakpoint-down('md') {
 		margin-left: utils.spacing(2);
 		margin-right: utils.spacing(2);
 	}

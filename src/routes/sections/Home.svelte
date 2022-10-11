@@ -43,7 +43,7 @@
 			align-items: center;
 			grid-row: 2;
 			grid-column: span 2;
-			margin-top: auto;
+			margin: auto 0;
 		}
 
 		&__figure {

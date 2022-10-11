@@ -77,6 +77,7 @@
 
 		&__summary {
 			display: flex;
+			padding-top: utils.spacing(2);
 			flex-direction: column;
 			grid-area: 1 / 2;
 		}
