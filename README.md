@@ -1,38 +1,33 @@
-# create-svelte
+# Hey, mate!
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+My name is Henrique Ramos, I'm 21 and I live in [Belo Horizonte, Minas Gerais, Brazil](https://goo.gl/maps/ydd9TSyMcLFzpgbv9). I'm a Software Engineering undergraduate at PUC Minas and a Front-end developer. In my spare time, I like to play Dota 2, read about UI/UX Design (Which, in my opinion, is an important trait for a Front-end dev) and about new community trends and sometimes I write articles on [dev.to](https://dev.to/hnrq). I want to become a Creative Developer someday, so I'm currently studying WebGL, Three.js and 3D modeling on Blender (And voxel art on MagicaVoxel).
 
-## Creating a project
+<p align="center">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/top-langs?username=hnrq&show_icons=true&layout=compact&locale=en&theme=dark" height="150" alt="Chart containing my top languages" style="margin-right: 2rem;" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img align="center" src="https://github-readme-stats.vercel.app/api?username=hnrq&show_icons=true&locale=en&layout=compact&theme=dark" height="150" alt="" />
+</p>
 
-If you're seeing this, you've probably already done this step. Congrats!
+## My Website
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+[![Netlify Status](https://api.netlify.com/api/v1/badges/c9cb4ce1-e706-454b-8169-d52fb4719e59/deploy-status)](https://hnrq.dev/)
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+My personal website is [hnrq.dev](https://hnrq.dev). The idea behind it was to impress my personality on it: I'm a sink or swim and very literal person, and that's why I used only black and white and no images at all (Even the icosahedron is made of ASCII characters).
 
-## Developing
+## Notable repos
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+### [TEMPO1984](https://github.com/hnrq/TEMPO1984)
 
-```bash
-npm run dev
+This one is my favorite by far. It was a task for the Human Computer Interaction college subject, that was about making a website based on a song. Then, I created [TEMPO1984](https://hnrq.github.io/TEMPO1984): A website based on Macintosh 3.1's design. It involved making the icons and bars as SVGs in Illustrator, searching for the font used there and much more. Tough job, but definitely worth it!
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+### [veloren-server](https://github.com/hnrq/veloren-server)
 
-## Building
+A shell script for creating an auto-updating Veloren server using System daemons. Useful for beginners who want to set up a server right off the bat.
 
-To create a production version of your app:
+### [Workout](https://github.com/hnrq/workout)
 
-```bash
-npm run build
-```
+Workout is a native Android app, built using Java. It is supposed to be an app to help keeping track of your exercise charts, you can create, edit, delete and share them through links or QR code with other people. This is a very nice project that I intend to remake it using Flutter in the future.
 
-You can preview the production build with `npm run preview`.
+### [rich-text-editor](https://github.com/hnrq/rich-text-editor)
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+This is a test of two of the most popular rich text editor frameworks: Slate.js and Draft.js. The result can be seen [here](https://slate-editor.herokuapp.com/#/slate).
