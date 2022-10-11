@@ -9,7 +9,7 @@
 
 <Section id="about" revealOnScroll style={`height: calc(100vh - 132px);`}>
 	<div class="about container">
-		<h1 class="about__title">ABOUT <br /> ME</h1>
+		<h2 class="about__title">ABOUT <br /> ME</h2>
 		<div class="about__summary">
 			<span class="about__summary-info">
 				<b>Name:</b> Henrique Alberone Ramos
@@ -31,7 +31,7 @@
 		</div>
 		<div class="about__skills">
 			{#each Object.entries(skills) as [label, value], index}
-				<div in:fade={{ delay: 500 * (index + 1), duration: 500 }}>
+				<div transition:fade={{ delay: 500 * (index + 1), duration: 500 }}>
 					<Skillbar {label} {value} />
 				</div>
 			{/each}

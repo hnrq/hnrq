@@ -51,9 +51,6 @@
 			right: 0;
 			top: 0;
 			bottom: 0;
-			@include utils.breakpoint-down('sm') {
-				top: 18%;
-			}
 			@include utils.breakpoint-down('md') {
 				position: absolute;
 			}

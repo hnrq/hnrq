@@ -2,7 +2,7 @@ import { fileURLToPath, URL } from 'url';
 
 import preprocess from 'svelte-preprocess';
 
-import adapter from '@sveltejs/adapter-auto';
+import adapter from '@sveltejs/adapter-static';
 
 const scssAliases = (aliases) => (url) => {
 	for (const [alias, aliasPath] of Object.entries(aliases)) {

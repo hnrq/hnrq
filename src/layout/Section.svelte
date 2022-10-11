@@ -17,7 +17,6 @@
 			const intersectionCallback = (entries: IntersectionObserverEntry[]) => {
 				const [entry] = entries;
 				visible = entry.isIntersecting;
-				if (visible) history.pushState(null, '', `#${id}`);
 			};
 			const intersectionObserver = new IntersectionObserver(intersectionCallback, {
 				threshold: 0.2,
@@ -40,7 +39,7 @@
 	@use '@src/theme/utils';
 
 	.section {
-		height: 100vh;
+		min-height: 100vh;
 		width: 100%;
 		scroll-margin-top: utils.spacing(20);
 		&__container {

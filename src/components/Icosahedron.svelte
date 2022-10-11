@@ -17,11 +17,10 @@
 			const effect = new AsciiEffect(renderer, ' .:-+*=%@#', { invert: true });
 			const scene = new THREE.Scene();
 			const handleWindowResize = () => {
-				const size = ref?.getBoundingClientRect().width - 50 || 400;
+				const size = Math.max(ref?.getBoundingClientRect().width - 50, 400);
 				renderer.setSize(size, size);
 				effect.setSize(size, size);
 			};
-
 			camera.position.y = 20;
 			camera.position.z = 500;
 			scene.background = new THREE.Color(0, 0, 0);
