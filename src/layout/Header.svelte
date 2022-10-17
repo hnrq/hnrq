@@ -12,12 +12,12 @@
 		<Link href="/#about">About</Link>
 		<Link href="/#posts">Posts</Link>
 	</nav>
-	<span
+	<button
 		class="header__theme-toggle"
 		on:click={() => theme.update((curr) => (curr === 'dark' ? 'light' : 'dark'))}
 	>
 		TURN {#if $theme === 'dark'}ON{:else}OFF{/if}
-	</span>
+	</button>
 </header>
 
 <style lang="scss">
@@ -48,6 +48,11 @@
 		}
 
 		&__theme-toggle {
+			background: var(--text-color);
+			border: none;
+			color: var(--background-color);
+			font: var(--body-font);
+			font-size: 1rem;
 			cursor: pointer;
 		}
 	}
