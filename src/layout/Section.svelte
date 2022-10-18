@@ -19,8 +19,7 @@
 				visible = entry.isIntersecting;
 			};
 			const intersectionObserver = new IntersectionObserver(intersectionCallback, {
-				threshold: 0.2,
-				rootMargin: '-100px'
+				threshold: 0.2
 			});
 			intersectionObserver.observe(ref);
 		}
@@ -42,6 +41,9 @@
 		min-height: 100vh;
 		width: 100%;
 		scroll-margin-top: utils.spacing(20);
+		@include utils.breakpoint-down('sm') {
+			scroll-margin-top: utils.spacing(16);
+		}
 		&__container {
 			height: 100%;
 			width: 100%;
