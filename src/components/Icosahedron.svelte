@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 
+	import { AsciiEffect } from '@src/utils/AsciiEffect';
 	import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-	import { AsciiEffect } from 'three/examples/jsm/effects/AsciiEffect';
 
 	import { browser } from '$app/environment';
 
