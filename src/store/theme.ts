@@ -5,7 +5,7 @@ import { browser } from '$app/environment';
 type Theme = 'dark' | 'light';
 
 let stored;
-if (browser) stored = localStorage.theme || 'dark';
+if (browser) stored = localStorage.theme ?? 'dark';
 
 const store = writable<Theme>(stored);
 

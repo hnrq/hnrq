@@ -19,7 +19,7 @@
 				visible = entry.isIntersecting;
 			};
 			const intersectionObserver = new IntersectionObserver(intersectionCallback, {
-				threshold: 0.2
+				threshold: 0.1
 			});
 			intersectionObserver.observe(ref);
 		}
