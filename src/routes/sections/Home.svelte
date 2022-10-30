@@ -3,7 +3,7 @@
 	import Section from '@src/layout/Section.svelte';
 </script>
 
-<Section id="" style={`height: calc(100vh - 132px);`}>
+<Section id="" style={`height: calc(100vh - 132px); min-height: initial;`}>
 	<div class="home container">
 		<div class="home__title">
 			<h1 class="title--reveal">WRITING</h1>
