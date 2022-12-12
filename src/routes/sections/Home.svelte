@@ -1,6 +1,8 @@
 <script>
 	import Icosahedron from '@src/components/Icosahedron.svelte';
 	import Section from '@src/layout/Section.svelte';
+
+	import { browser } from '$app/environment';
 </script>
 
 <Section id="" style={`height: calc(100vh - 132px); min-height: initial;`}>
@@ -12,7 +14,9 @@
 			<h1 class="title--reveal">CODE</h1>
 		</div>
 		<div class="home__figure">
-			<Icosahedron />
+			{#if browser}
+				<Icosahedron />
+			{/if}
 		</div>
 
 		<div class="home__footer">

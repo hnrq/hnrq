@@ -1,69 +1,52 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 
-	import { AsciiEffect } from '@src/utils/AsciiEffect';
-	import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+	import {
+		Canvas,
+		PerspectiveCamera,
+		DirectionalLight,
+		OrbitControls,
+		Pass,
+		Mesh
+	} from '@threlte/core';
+	import { MeshLambertMaterial, IcosahedronGeometry } from 'three';
+	import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
+	import { DotScreenShader } from 'three/examples/jsm/shaders/DotScreenShader.js';
 
-	import { browser } from '$app/environment';
+	const effect = new ShaderPass(DotScreenShader);
+	effect.uniforms['scale'].value = 1;
 
-	let ref: HTMLElement;
+	let ref: HTMLDivElement;
+	let size: number;
 
-	onMount(async () => {
-		if (browser) {
-			const THREE = await import('three');
+	const onResize = () => {
+		size = Math.max(ref?.getBoundingClientRect().width - 50, 400);
+		effect.setSize(size, size);
+	};
 
-			const renderer = new THREE.WebGLRenderer();
-			const camera = new THREE.PerspectiveCamera(70, 1, 1, 500);
-			const effect = new AsciiEffect(renderer, ' .:-+*=%@#', { invert: true });
-			const scene = new THREE.Scene();
-			const handleWindowResize = () => {
-				const size = Math.max(ref?.getBoundingClientRect().width - 50, 400);
-				renderer.setSize(size, size);
-				effect.setSize(size, size);
-			};
-			camera.position.y = 20;
-			camera.position.z = 500;
-			scene.background = new THREE.Color(0, 0, 0);
-			const firstLight = new THREE.PointLight(0xffffff);
-			firstLight.position.set(500, 500, 500);
-			const secondLight = new THREE.PointLight(0xffffff);
-			secondLight.position.set(-500, -500, -500);
-			scene.add(firstLight);
-			scene.add(secondLight);
-			camera.aspect = 1;
-			camera.updateProjectionMatrix();
-			handleWindowResize();
+	onMount(() => {
+		onResize();
+		window.addEventListener('resize', onResize);
+	});
 
-			const mesh = new THREE.Mesh(
-				new THREE.IcosahedronGeometry(275),
-				new THREE.MeshLambertMaterial()
-			);
-			scene.add(mesh);
-			const controls = new OrbitControls(camera, effect.domElement);
-			controls.enableZoom = false;
-			controls.enablePan = false;
-			const start = Date.now();
-			const render = () => {
-				const timer = Date.now() - start;
-				mesh.rotation.x = timer * 0.0003;
-				mesh.rotation.z = timer * 0.0002;
-				controls.update();
-				effect.render(scene, camera);
-			};
-
-			const animate = () => {
-				requestAnimationFrame(animate);
-				render();
-			};
-
-			ref.appendChild(effect.domElement);
-			window.addEventListener('resize', handleWindowResize, false);
-			animate();
-		}
+	onDestroy(() => {
+		window.removeEventListener('resize', onResize);
 	});
 </script>
 
-<div class="icosahedron" bind:this={ref} />
+<div class="icosahedron" bind:this={ref}>
+	<Canvas size={{ width: size, height: size }}>
+		<PerspectiveCamera position={{ x: 0, y: 2, z: 5 }} fov={70}>
+			<OrbitControls enableZoom={false} enablePan={false} autoRotate />
+		</PerspectiveCamera>
+
+		<DirectionalLight position={{ x: 1, y: 1, z: 0 }} />
+
+		<Pass pass={effect} />
+
+		<Mesh material={new MeshLambertMaterial()} geometry={new IcosahedronGeometry(3)} />
+	</Canvas>
+</div>
 
 <style lang="scss">
 	.icosahedron {
@@ -73,5 +56,6 @@
 		margin: 0;
 		color: var(--text-color);
 		width: 100%;
+		height: 100%;
 	}
 </style>
