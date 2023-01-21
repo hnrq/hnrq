@@ -2,26 +2,28 @@
 	import { onDestroy, onMount } from 'svelte';
 
 	import {
+		Mesh,
 		Canvas,
 		PerspectiveCamera,
 		DirectionalLight,
 		OrbitControls,
-		Pass,
-		Mesh
+		SpotLight
 	} from '@threlte/core';
-	import { MeshLambertMaterial, IcosahedronGeometry } from 'three';
-	import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
-	import { DotScreenShader } from 'three/examples/jsm/shaders/DotScreenShader.js';
-
-	const effect = new ShaderPass(DotScreenShader);
-	effect.uniforms['scale'].value = 1;
+	import {
+		BufferGeometry,
+		Color,
+		IcosahedronGeometry,
+		MeshPhongMaterial,
+		Mesh as MeshType
+	} from 'three';
+	import PixelPostprocessing from '@src/components/PixelPostprocessing.svelte';
 
 	let ref: HTMLDivElement;
 	let size: number;
+	let mesh: MeshType<BufferGeometry>;
 
 	const onResize = () => {
 		size = Math.max(ref?.getBoundingClientRect().width - 50, 400);
-		effect.setSize(size, size);
 	};
 
 	onMount(() => {
@@ -39,12 +41,14 @@
 		<PerspectiveCamera position={{ x: 0, y: 2, z: 5 }} fov={70}>
 			<OrbitControls enableZoom={false} enablePan={false} autoRotate />
 		</PerspectiveCamera>
-
-		<DirectionalLight position={{ x: 1, y: 1, z: 0 }} />
-
-		<Pass pass={effect} />
-
-		<Mesh material={new MeshLambertMaterial()} geometry={new IcosahedronGeometry(3)} />
+		<Mesh
+			bind:mesh
+			material={new MeshPhongMaterial({ color: new Color(0.7, 0, 1) })}
+			geometry={new IcosahedronGeometry(3)}
+		/>
+		<DirectionalLight position={{ x: 100, y: 100, z: 100 }} />
+		<SpotLight color={0xff8800} distance={10} angle={Math.PI / 16} target={mesh} />
+		<PixelPostprocessing pixelSize={15} />
 	</Canvas>
 </div>
 
