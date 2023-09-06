@@ -8,8 +8,10 @@ export default defineConfig({
 		environment: 'happy-dom',
 		setupFiles: ['tests/setup.ts'],
 		globals: true,
-		deps: {
-			inline: ['@sveltejs/kit'],
-	  },
+		server: {
+			deps: {
+				inline: ['@sveltejs/kit']
+			}
+		}
 	}
 });
