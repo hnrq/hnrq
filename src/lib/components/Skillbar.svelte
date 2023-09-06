@@ -13,7 +13,7 @@
 </div>
 
 <style lang="scss">
-	@use '@src/theme/utils';
+	@use '$lib/theme/utils';
 	$border-width: 2px;
 
 	.skillbar {

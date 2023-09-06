@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { PageData } from '.svelte-kit/types/src/routes/$types';
 
-	import '@src/theme/index.scss';
+	import '$lib/theme/index.scss';
 	import About from './sections/About.svelte';
 	import Home from './sections/Home.svelte';
 	import Posts from './sections/Posts.svelte';
@@ -16,7 +16,7 @@
 </div>
 
 <style lang="scss">
-	@use '@src/theme/utils';
+	@use '$lib/theme/utils';
 
 	.index {
 		display: flex;

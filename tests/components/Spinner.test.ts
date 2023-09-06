@@ -1,4 +1,4 @@
-import Spinner from '@src/components/Spinner.svelte';
+import Spinner from '$lib/components/Spinner.svelte';
 import { render } from '@testing-library/svelte';
 
 describe('<Spinner />', () => {

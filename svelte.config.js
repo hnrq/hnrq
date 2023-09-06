@@ -1,39 +1,16 @@
-import { fileURLToPath, URL } from 'url';
-
-import preprocess from 'svelte-preprocess';
-
 import adapter from '@sveltejs/adapter-static';
-
-const scssAliases = (aliases) => (url) => {
-	for (const [alias, aliasPath] of Object.entries(aliases)) {
-		if (url.indexOf(alias) === 0) {
-			return {
-				file: url.replace(alias, aliasPath)
-			};
-		}
-	}
-	return url;
-};
+import { vitePreprocess } from '@sveltejs/kit/vite';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	// Consult https://github.com/sveltejs/svelte-preprocess
+	// Consult https://kit.svelte.dev/docs/integrations#preprocessors
 	// for more information about preprocessors
-	preprocess: preprocess({
-		scss: {
-			importer: [
-				scssAliases({
-					'@src': fileURLToPath(new URL('./src', import.meta.url))
-				})
-			]
-		}
-	}),
+	preprocess: vitePreprocess(),
 
 	kit: {
 		adapter: adapter(),
 		alias: {
-			'@src/*': 'src/*',
-			'@mocks/*': '__mocks__/*'
+			'$mocks/*': '__mocks__/*'
 		}
 	}
 };

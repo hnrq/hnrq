@@ -1,9 +1,9 @@
 <script lang="ts">
-	import media from '@src/assets/media';
-	import skills from '@src/assets/skills';
-	import Link from '@src/components/Link.svelte';
-	import Skillbar from '@src/components/Skillbar.svelte';
-	import Section from '@src/layout/Section.svelte';
+	import media from '$lib/assets/media';
+	import skills from '$lib/assets/skills';
+	import Link from '$lib/components/Link.svelte';
+	import Skillbar from '$lib/components/Skillbar.svelte';
+	import Section from '$lib/layout/Section.svelte';
 	import { fade } from 'svelte/transition';
 </script>
 
@@ -52,8 +52,8 @@
 </Section>
 
 <style lang="scss">
-	@use '@src/theme/utils';
-	@use '@src/theme/components/container';
+	@use '$lib/theme/utils';
+	@use '$lib/theme/components/container';
 
 	.about {
 		display: grid;

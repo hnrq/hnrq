@@ -35,7 +35,7 @@
 </section>
 
 <style lang="scss">
-	@use '@src/theme/utils';
+	@use '$lib/theme/utils';
 
 	.section {
 		min-height: 100vh;

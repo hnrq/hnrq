@@ -7,7 +7,7 @@ export default interface Post {
 	crossposted_at?: string;
 	description: string;
 	edited_at: string;
-	id: number;
+	id: string;
 	last_comment_at: string;
 	positive_reactions_count: number;
 	public_reactions_count: number;

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type Post from '@src/types/Post';
+	import type Post from '$lib/types/Post';
 
 	export let post: Post;
 </script>
@@ -23,7 +23,7 @@
 </a>
 
 <style lang="scss">
-	@use '@src/theme/utils';
+	@use '$lib/theme/utils';
 
 	.post {
 		color: var(--text-color);

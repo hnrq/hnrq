@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
-import posts from '@mocks/posts';
-import Post from '@src/components/Post.svelte';
+import posts from '$mocks/posts';
+import Post from '$lib/components/Post.svelte';
 import { render } from '@testing-library/svelte';
 
 const post = faker.helpers.arrayElement(posts);

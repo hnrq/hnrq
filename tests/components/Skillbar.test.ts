@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import Skillbar from '@src/components/Skillbar.svelte';
+import Skillbar from '$lib/components/Skillbar.svelte';
 import { render } from '@testing-library/svelte';
 
 describe('<Skillbar />', () => {

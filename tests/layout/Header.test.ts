@@ -1,4 +1,4 @@
-import Header from '@src/layout/Header.svelte';
+import Header from '$lib/layout/Header.svelte';
 import { render } from '@testing-library/svelte';
 
 describe('<Header />', () => {

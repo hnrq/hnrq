@@ -1,7 +1,7 @@
 <script lang="ts">
-	import Post from '@src/components/Post.svelte';
-	import Section from '@src/layout/Section.svelte';
-	import type PostType from '@src/types/Post';
+	import Post from '$lib/components/Post.svelte';
+	import Section from '$lib/layout/Section.svelte';
+	import type PostType from '$lib/types/Post';
 	import { fade } from 'svelte/transition';
 
 	export let posts: PostType[];
@@ -19,8 +19,8 @@
 </Section>
 
 <style lang="scss">
-	@use '@src/theme/utils';
-	@use '@src/theme/components/container';
+	@use '$lib/theme/utils';
+	@use '$lib/theme/components/container';
 
 	.posts {
 		display: grid;

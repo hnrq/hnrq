@@ -1,6 +1,6 @@
 <script>
-	import Icosahedron from '@src/components/Icosahedron.svelte';
-	import Section from '@src/layout/Section.svelte';
+	import Icosahedron from '$lib/components/Icosahedron.svelte';
+	import Section from '$lib/layout/Section.svelte';
 
 	import { browser } from '$app/environment';
 </script>
@@ -27,8 +27,8 @@
 </Section>
 
 <style lang="scss">
-	@use '@src/theme/utils';
-	@use '@src/theme/components/container';
+	@use '$lib/theme/utils';
+	@use '$lib/theme/components/container';
 
 	$delay: 500ms;
 	$duration: 800ms;

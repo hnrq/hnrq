@@ -1,7 +1,7 @@
 <div class="spinner" data-testid="spinner" />
 
 <style lang="scss">
-	@use '@src/theme/utils';
+	@use '$lib/theme/utils';
 
 	.spinner {
 		width: utils.spacing(5);

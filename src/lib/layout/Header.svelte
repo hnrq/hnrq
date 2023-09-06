@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Link from '@src/components/Link.svelte';
-	import theme from '@src/store/theme';
+	import Link from '$lib/components/Link.svelte';
+	import theme from '$lib/store/theme';
 </script>
 
 <header class="header">
@@ -21,7 +21,7 @@
 </header>
 
 <style lang="scss">
-	@use '@src/theme/utils';
+	@use '$lib/theme/utils';
 
 	.header {
 		padding-top: utils.spacing(3);
