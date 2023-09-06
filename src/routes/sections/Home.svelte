@@ -1,8 +1,7 @@
 <script>
-	import Icosahedron from '$lib/components/Icosahedron.svelte';
-	import Section from '$lib/layout/Section.svelte';
-
 	import { browser } from '$app/environment';
+	import Icosahedron from '$lib/components/Icosahedron/Icosahedron.svelte';
+	import Section from '$lib/layout/Section.svelte';
 </script>
 
 <Section id="" style={`height: calc(100vh - 132px); min-height: initial;`}>

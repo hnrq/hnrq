@@ -3,7 +3,8 @@
 
 	import { Canvas, T } from '@threlte/core';
 	import { OrbitControls } from '@threlte/extras';
-	import { MeshLambertMaterial, IcosahedronGeometry } from 'three';
+
+	import IcosahedronMesh from './IcosahedronMesh.svelte';
 
 	let ref: HTMLDivElement;
 	let size: number;
@@ -24,8 +25,7 @@
 		<T.PerspectiveCamera makeDefault position={[0, 2, 5]} fov={70}>
 			<OrbitControls enableZoom={false} enablePan={false} autoRotate />
 		</T.PerspectiveCamera>
-		<T.DirectionalLight position={[1, 1, 0]} />
-		<T.Mesh material={new MeshLambertMaterial()} geometry={new IcosahedronGeometry(3)} />
+		<IcosahedronMesh />
 	</Canvas>
 </div>
 
