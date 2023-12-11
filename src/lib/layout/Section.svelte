@@ -27,18 +27,16 @@
 </script>
 
 <section {id} {style} bind:this={ref} class="section">
-	{#if visible}
-		<div transition:fade={{ duration: 500, delay: 200 }} class="section__container">
-			<slot />
-		</div>
-	{/if}
+	<div class="section__container" class:section__container--hidden={!visible}>
+		<slot />
+	</div>
 </section>
 
 <style lang="scss">
 	@use '$lib/theme/utils';
 
 	.section {
-		min-height: 100vh;
+		min-height: calc(100vh - 132px);
 		width: 100%;
 		scroll-margin-top: utils.spacing(20);
 		@include utils.breakpoint-down('sm') {
@@ -47,6 +45,11 @@
 		&__container {
 			height: 100%;
 			width: 100%;
+			transition: opacity 0.5s ease-in-out 0.2s;
+
+			&--hidden {
+				opacity: 0;
+			}
 		}
 	}
 </style>

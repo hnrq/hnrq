@@ -7,7 +7,7 @@
 	import { fade } from 'svelte/transition';
 </script>
 
-<Section id="about" revealOnScroll style={`height: calc(100vh - 132px);`}>
+<Section id="about" revealOnScroll>
 	<div class="about container">
 		<h2 class="about__title">ABOUT <br /> ME</h2>
 		<div class="about__summary">

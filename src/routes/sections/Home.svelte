@@ -4,7 +4,7 @@
 	import Section from '$lib/layout/Section.svelte';
 </script>
 
-<Section id="" style={`height: calc(100vh - 132px); min-height: initial;`}>
+<Section id="">
 	<div class="home container">
 		<div class="home__title">
 			<h1 class="title--reveal">WRITING</h1>
