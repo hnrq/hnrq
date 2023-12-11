@@ -1,5 +1,6 @@
-import type Post from '$lib/types/Post';
 import type { Load } from '@sveltejs/kit';
+
+import type Post from '$lib/types/Post';
 
 export const prerender = true;
 

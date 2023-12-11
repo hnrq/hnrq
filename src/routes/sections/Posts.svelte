@@ -1,8 +1,9 @@
 <script lang="ts">
+	import { fade } from 'svelte/transition';
+
 	import Post from '$lib/components/Post.svelte';
 	import Section from '$lib/layout/Section.svelte';
 	import type PostType from '$lib/types/Post';
-	import { fade } from 'svelte/transition';
 
 	export let posts: PostType[];
 </script>

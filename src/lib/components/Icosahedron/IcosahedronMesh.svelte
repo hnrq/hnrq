@@ -25,5 +25,5 @@
 	});
 </script>
 
-<T.HemisphereLight groundColor={0x00000c} intensity={0.2} />
+<T.HemisphereLight groundColor={0x00000c} intensity={1.5} />
 <T.Mesh material={new MeshLambertMaterial()} geometry={new IcosahedronGeometry(3)} />

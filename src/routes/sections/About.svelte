@@ -1,10 +1,11 @@
 <script lang="ts">
+	import { fade } from 'svelte/transition';
+
 	import media from '$lib/assets/media';
 	import skills from '$lib/assets/skills';
 	import Link from '$lib/components/Link.svelte';
 	import Skillbar from '$lib/components/Skillbar.svelte';
 	import Section from '$lib/layout/Section.svelte';
-	import { fade } from 'svelte/transition';
 </script>
 
 <Section id="about" revealOnScroll>
