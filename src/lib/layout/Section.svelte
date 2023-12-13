@@ -24,7 +24,7 @@
 	});
 </script>
 
-<section {id} {style} bind:this={ref} class="section" class:section__container--hidden={!visible}>
+<section {id} {style} bind:this={ref} class="section" class:section--hidden={!visible}>
 	<slot />
 </section>
 

@@ -1,10 +1,6 @@
 <script lang="ts">
-	import { fade } from 'svelte/transition';
-
 	import media from '$lib/assets/media';
-	import skills from '$lib/assets/skills';
 	import Link from '$lib/components/Link.svelte';
-	import Skillbar from '$lib/components/Skillbar.svelte';
 	import Section from '$lib/layout/Section.svelte';
 </script>
 
@@ -30,20 +26,15 @@
 				{/each}
 			</div>
 		</div>
-		<div class="about__skills">
-			{#each Object.entries(skills) as [label, value], index}
-				<div transition:fade={{ delay: 500 * (index + 1), duration: 500 }}>
-					<Skillbar {label} {value} />
-				</div>
-			{/each}
-		</div>
 		<div class="about__bio">
 			<h4 class="about__bio-title">Bio:</h4>
 			<p>
-				Software Engineer who spends his spare time trying to learn something new about Web, Mobile
-				Development and UI/UX design. Likes video editing, muddling through Illustrator and loses
-				his by playing Dota 2. Also writes about his programming misadventures on{' '}
-				<a href={media['Dev.to']} target="_blank" rel="noopener noreferrer" class="link">
+				I'm a Front-end software engineer who aims to create products with great User Experience. I
+				believe a good UX, along with an eye-catching User Interface, is what stands out first for
+				the customer. By working closely together with designers, developers and customers, I strive
+				to create out-of-the-box experiences, using a test-first approach for creating performant
+				and re-usable components joyful interfaces. I also write sometimes to{' '}
+				<a href={media['Dev.to']} target="_blank" rel="noopener noreferrer" class="about__link">
 					Dev.to
 				</a>
 				.
@@ -59,7 +50,7 @@
 	.about {
 		display: grid;
 		grid-template: auto 1fr / repeat(2, 1fr);
-		grid-gap: utils.spacing(4);
+		gap: utils.spacing(4);
 
 		@include utils.breakpoint-down('sm') {
 			display: flex;
@@ -80,13 +71,11 @@
 			display: flex;
 			padding-top: utils.spacing(2);
 			flex-direction: column;
-			grid-area: 1 / 2;
+			grid-area: span 1 / 2;
 		}
 
-		&__skills {
-			display: flex;
-			flex-direction: column;
-			row-gap: utils.spacing(1);
+		&__bio {
+			grid-area: 2 / 2;
 		}
 
 		&__links {
@@ -96,6 +85,7 @@
 		}
 
 		&__link {
+			color: var(--text-color);
 			font-weight: 700;
 		}
 	}
