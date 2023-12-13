@@ -33,11 +33,9 @@
 	$duration: 800ms;
 
 	.home {
-		height: 100%;
 		display: grid;
-		grid-template: auto 1fr / 50% 50%;
+		grid-template: 1fr 1fr / 50% 50%;
 		position: relative;
-		height: 100%;
 		align-content: space-around;
 
 		&__footer {
