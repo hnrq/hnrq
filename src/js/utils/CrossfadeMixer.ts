@@ -3,17 +3,30 @@ import * as THREE from 'three';
 
 export type ActionsByName = Record<string, { weight: number; action: THREE.AnimationAction }>;
 
+const FADE_DURATION = 0.35;
+
 const setWeight = (action: THREE.AnimationAction, weight: number) => {
   action.enabled = true;
   action.setEffectiveTimeScale(1);
   action.setEffectiveWeight(weight);
 };
 
-const CrossfadeMixer = (model: THREE.Group, animations: THREE.AnimationClip[]) => {
+interface CrossFadeMixerOpts {
+  fadeDuration: number;
+}
+
+const CrossfadeMixer = (
+  model: THREE.Group,
+  animations: THREE.AnimationClip[],
+  { fadeDuration }: CrossFadeMixerOpts = { fadeDuration: FADE_DURATION },
+) => {
   const mixer = new THREE.AnimationMixer(model);
   const actions: ActionsByName = {};
   const animationControllers: Controller[] = [];
   let currentActionName = animations[0].name;
+
+  const playAction = (actionName: string) =>
+    prepareCrossFade(actions[currentActionName]?.action, actions[actionName]?.action, fadeDuration);
 
   const activateAction = (action: THREE.AnimationAction) => {
     const clip = action.getClip();
@@ -52,7 +65,7 @@ const CrossfadeMixer = (model: THREE.Group, animations: THREE.AnimationClip[]) =
         const currentAction = actions[currentActionName]?.action ?? null;
         const action = actions[actionName]?.action ?? null;
 
-        if (currentAction !== action) prepareCrossFade(currentAction, action, 0.35);
+        if (currentAction !== action) playAction(actionName);
       };
 
       animationControllers.push(panel.add(panelSettings, actionName));
@@ -61,30 +74,12 @@ const CrossfadeMixer = (model: THREE.Group, animations: THREE.AnimationClip[]) =
     toggleButtonStyling();
   };
 
-  const synchronizeCrossFade = (
-    startAction: THREE.AnimationAction,
-    endAction: THREE.AnimationAction,
-    duration: number,
-  ) => {
-    const onLoopFinished = (event: THREE.AnimationMixerEventMap['loop']) => {
-      if (event.action === startAction) {
-        mixer.removeEventListener('loop', onLoopFinished);
-        executeCrossFade(startAction, endAction, duration);
-      }
-    };
-
-    mixer.addEventListener('loop', onLoopFinished);
-  };
-
   const prepareCrossFade = (
     startAction: THREE.AnimationAction,
     endAction: THREE.AnimationAction,
     duration: number,
   ) => {
-    if (currentActionName === 'Survey' || !startAction || !endAction) {
-      executeCrossFade(startAction, endAction, duration);
-    } else synchronizeCrossFade(startAction, endAction, duration);
-
+    executeCrossFade(startAction, endAction, duration);
     currentActionName = endAction?.getClip().name ?? 'None';
   };
 
@@ -94,7 +89,7 @@ const CrossfadeMixer = (model: THREE.Group, animations: THREE.AnimationClip[]) =
     activateAction(action);
   });
 
-  return { actions, mixer, prepareCrossFade, createPanel };
+  return { actions, mixer, prepareCrossFade, createPanel, playAction };
 };
 
 export default CrossfadeMixer;
