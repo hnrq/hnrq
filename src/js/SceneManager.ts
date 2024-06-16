@@ -1,23 +1,27 @@
 import * as THREE from 'three';
 import { type Subject } from './subjects';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
-type SceneManagerOpts = {
+interface SceneManagerOpts {
   subjects: Subject[];
-};
+}
 
-const SceneManager = (canvas: HTMLCanvasElement, opts: SceneManagerOpts = { subjects: [] }) => {
+const SceneManager = (opts: SceneManagerOpts = { subjects: [] }) => {
+  const scene = new THREE.Scene();
+  const renderer = new THREE.WebGLRenderer();
+  document.body.appendChild(renderer.domElement);
+
   const clock = new THREE.Clock();
   const subjects: Subject[] = [...opts.subjects];
   let previousTime = 0;
 
   const screenDimensions = {
-    width: canvas.width,
-    height: canvas.height,
+    width: window.innerWidth,
+    height: window.innerHeight,
   };
 
-  const scene = new THREE.Scene();
-  const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
-  renderer.setPixelRatio(window.devicePixelRatio ?? 1);
+  scene.add(...subjects.map(({ mesh }) => mesh));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.setSize(screenDimensions.width, screenDimensions.height);
 
   const camera = new THREE.PerspectiveCamera(
@@ -27,24 +31,32 @@ const SceneManager = (canvas: HTMLCanvasElement, opts: SceneManagerOpts = { subj
     100,
   );
 
+  const controls = new OrbitControls(camera, renderer.domElement);
+
   return {
+    camera,
     update: () => {
       const elapsedTime = clock.getElapsedTime();
       const deltaTime = elapsedTime - previousTime;
+      previousTime = elapsedTime;
+      controls.update();
       subjects.forEach(({ update }) => update?.(elapsedTime, deltaTime));
+
       renderer.render(scene, camera);
     },
-    addSubject: (subject: Subject) => subjects.push(subject),
+    addSubject: (subject: Subject) => {
+      subjects.push(subject);
+      scene.add(subject.mesh);
+    },
     onWindowResize: () => {
-      const { width, height } = canvas;
+      screenDimensions.width = window.innerWidth;
+      screenDimensions.height = window.innerHeight;
 
-      screenDimensions.width = width;
-      screenDimensions.height = height;
-
-      camera.aspect = width / height;
+      camera.aspect = screenDimensions.width / screenDimensions.height;
       camera.updateProjectionMatrix();
 
-      renderer.setSize(width, height);
+      renderer.setSize(screenDimensions.width, screenDimensions.height);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     },
   };
 };

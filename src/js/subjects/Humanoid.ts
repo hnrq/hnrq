@@ -1,4 +1,4 @@
-import type * as THREE from 'three';
+import * as THREE from 'three';
 
 import type { GLTFLoader } from 'three/examples/jsm/Addons.js';
 import HumanoidModel from '@resources/models/humanoid.glb';
@@ -6,20 +6,22 @@ import CrossfadeMixer from '@js/utils/CrossfadeMixer';
 import type GUI from 'lil-gui';
 import type { Subject } from '.';
 
-type FoxOpts = {
+interface FoxOpts {
   gltfLoader: GLTFLoader;
   gui: GUI;
   debug?: boolean;
-};
+}
+
+const basicMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
 
 const Humanoid = async ({ gltfLoader, gui, debug }: FoxOpts): Promise<Subject> => {
-  let mixer: ReturnType<typeof CrossfadeMixer>;
-  let mesh: THREE.Group<THREE.Object3DEventMap>;
-
   const gltf = await gltfLoader.loadAsync(HumanoidModel);
-  mesh = gltf.scene;
-  mesh.scale.set(0.025, 0.025, 0.025);
-  mixer = CrossfadeMixer(mesh, gltf.animations);
+  gltf.scene.traverse((child) => {
+    if ((child as THREE.Mesh).isMesh) (child as THREE.Mesh).material = basicMaterial;
+  });
+  const mesh = gltf.scene;
+  mesh.position.set(0, 0, -2);
+  const mixer = CrossfadeMixer(mesh, gltf.animations);
 
   if (debug) mixer.createPanel(gui);
 

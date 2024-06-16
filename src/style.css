@@ -10,9 +10,16 @@ body {
   overflow: hidden;
 }
 
-#webgl {
-  position: fixed;
+#loading {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
   top: 0;
   left: 0;
-  outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000;
+  color: #fff;
+  transition: opacity 1s;
 }
