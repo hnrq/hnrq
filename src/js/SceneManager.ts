@@ -1,6 +1,5 @@
 import * as THREE from 'three';
-import { type Subject } from './subjects';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { type Subject } from './world';
 
 interface SceneManagerOpts {
   subjects: Subject[];
@@ -13,7 +12,6 @@ const SceneManager = (opts: SceneManagerOpts = { subjects: [] }) => {
 
   const clock = new THREE.Clock();
   const subjects: Subject[] = [...opts.subjects];
-  let previousTime = 0;
 
   const screenDimensions = {
     width: window.innerWidth,
@@ -31,18 +29,16 @@ const SceneManager = (opts: SceneManagerOpts = { subjects: [] }) => {
     100,
   );
 
-  const controls = new OrbitControls(camera, renderer.domElement);
+  camera.position.set(4, 5, 1);
 
   return {
     camera,
+    scene,
     update: () => {
-      const elapsedTime = clock.getElapsedTime();
-      const deltaTime = elapsedTime - previousTime;
-      previousTime = elapsedTime;
-      controls.update();
-      subjects.forEach(({ update }) => update?.(elapsedTime, deltaTime));
-
+      const delta = clock.getDelta();
+      subjects.forEach(({ update }) => update?.(delta));
       renderer.render(scene, camera);
+      return delta;
     },
     addSubject: (subject: Subject) => {
       subjects.push(subject);

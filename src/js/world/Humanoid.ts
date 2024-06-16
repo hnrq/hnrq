@@ -12,9 +12,23 @@ interface FoxOpts {
   debug?: boolean;
 }
 
+export type HumanoidActions =
+  | 'None'
+  | 'Idle'
+  | 'Walk'
+  | 'Run'
+  | 'Open Door'
+  | 'Sit to Stand'
+  | 'Stand to Sit';
+
+type HumanoidSubject = Subject & {
+  mixer: ReturnType<typeof CrossfadeMixer>;
+  playAction: (actionName: HumanoidActions) => void;
+};
+
 const basicMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
 
-const Humanoid = async ({ gltfLoader, gui, debug }: FoxOpts): Promise<Subject> => {
+const Humanoid = async ({ gltfLoader, gui, debug }: FoxOpts): Promise<HumanoidSubject> => {
   const gltf = await gltfLoader.loadAsync(HumanoidModel);
   gltf.scene.traverse((child) => {
     if ((child as THREE.Mesh).isMesh) (child as THREE.Mesh).material = basicMaterial;
@@ -27,9 +41,9 @@ const Humanoid = async ({ gltfLoader, gui, debug }: FoxOpts): Promise<Subject> =
 
   return {
     mesh,
-    update: (_, deltaTime) => {
-      for (const actionName in mixer?.actions)
-        mixer.actions[actionName].weight = mixer.actions[actionName].action.getEffectiveWeight();
+    mixer,
+    playAction: (action: HumanoidActions) => mixer.playAction(action),
+    update: (deltaTime) => {
       mixer.mixer.update(deltaTime);
     },
   };
