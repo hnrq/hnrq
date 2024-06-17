@@ -8,7 +8,7 @@ import { GLTFLoader } from 'three/examples/jsm/Addons.js';
 import { DEBUG } from './debug';
 import Mouse from './utils/Mouse';
 import Floor from './world/Floor';
-import MouseCharacterControls from './utils/MouseCharacterControls';
+import IsometricCharacterControls from './utils/IsometricCharacterControls';
 
 const mesh = new THREE.Mesh(
   new THREE.BoxGeometry(1, 1, 1),
@@ -27,7 +27,7 @@ const sceneManager = SceneManager({ subjects: [humanoid, floor, { mesh }] });
 sceneManager.camera.lookAt(humanoid.mesh.position);
 const mouse = new Mouse({ camera: sceneManager.camera, scene: sceneManager.scene, debug: DEBUG });
 
-const controls = MouseCharacterControls({
+const controls = IsometricCharacterControls({
   model: humanoid.mesh,
   floor: floor.mesh,
   camera: sceneManager.camera,
@@ -43,6 +43,7 @@ window.addEventListener('resize', () => {
 const tick = () => {
   window.requestAnimationFrame(tick);
   const delta = sceneManager.update();
+  mouse.update();
   controls.update(delta);
 };
 

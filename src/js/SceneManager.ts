@@ -29,7 +29,7 @@ const SceneManager = (opts: SceneManagerOpts = { subjects: [] }) => {
     100,
   );
 
-  camera.position.set(4, 5, 1);
+  camera.position.set(8, 8, 3);
 
   return {
     camera,

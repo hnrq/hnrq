@@ -3,7 +3,7 @@ import type Mouse from './Mouse';
 
 type Actions = 'Idle' | 'Walk' | 'Run';
 
-interface MouseCharacterControlsOpts {
+interface IsometricCharacterControlsOpts {
   model: THREE.Object3D;
   floor: THREE.Object3D;
   camera: THREE.Camera;
@@ -12,17 +12,17 @@ interface MouseCharacterControlsOpts {
   cameraFollow?: boolean;
 }
 
-const RUN_VELOCITY = 5;
-const WALK_VELOCITY = 1.5;
+const RUN_VELOCITY = 6;
+const WALK_VELOCITY = 2;
 
-const MouseCharacterControls = ({
+const IsometricCharacterControls = ({
   model,
   floor,
   camera,
   onActionChange,
   mouse,
   cameraFollow,
-}: MouseCharacterControlsOpts) => {
+}: IsometricCharacterControlsOpts) => {
   let currentAction: Actions = 'Idle';
   const update = (deltaTime: number) => {
     if (!mouse.pressed && currentAction !== 'Idle') {
@@ -67,4 +67,4 @@ const MouseCharacterControls = ({
   return { update };
 };
 
-export default MouseCharacterControls;
+export default IsometricCharacterControls;

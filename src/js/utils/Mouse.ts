@@ -14,6 +14,7 @@ export default class Mouse {
   private debugMesh: THREE.Mesh | undefined = undefined;
   private camera: THREE.Camera;
   private scene: THREE.Scene;
+  private animationFrameID: number | undefined;
   private position = new THREE.Vector2();
 
   constructor({ camera, debug, scene }: MouseOpts) {
@@ -33,25 +34,29 @@ export default class Mouse {
 
     window.addEventListener('pointerdown', (event) => {
       this.pressed = true;
-      this.updateRaycaster(event);
+      this.updatePosition(event);
       if (this.debugMesh) this.debugMesh.visible = true;
     });
     window.addEventListener('pointerup', () => {
       this.pressed = false;
+      if (this.animationFrameID) cancelAnimationFrame(this.animationFrameID);
       if (this.debugMesh) this.debugMesh.visible = false;
     });
 
     window.addEventListener('pointermove', (event) => {
-      if (!this.pressed) return;
-      this.updateRaycaster(event);
+      if (this.pressed) this.updatePosition(event);
     });
   }
 
-  updateRaycaster = (event: MouseEvent) => {
+  updatePosition = (event: PointerEvent) => {
     this.position.set(
       (event.clientX / window.innerWidth) * 2 - 1,
       -(event.clientY / window.innerHeight) * 2 + 1,
     );
+  };
+
+  update = () => {
+    if (!this.pressed) return;
     this.raycaster.setFromCamera(this.position, this.camera);
 
     if (this.debug) {
