@@ -1,9 +1,10 @@
-import { DEBUG } from '@js/debug';
-import * as THREE from 'three';
+import { PlaneGeometry } from 'three/src/geometries/PlaneGeometry.js';
+import { MeshBasicMaterial } from 'three/src/materials/MeshBasicMaterial.js';
+import { Mesh } from 'three/src/objects/Mesh.js';
 
-const mesh = new THREE.Mesh(
-  new THREE.PlaneGeometry(100, 100),
-  new THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: DEBUG }),
+const mesh = new Mesh(
+  new PlaneGeometry(100, 100),
+  new MeshBasicMaterial({ transparent: true, opacity: 0 }),
 );
 
 mesh.rotateX(-Math.PI / 2);

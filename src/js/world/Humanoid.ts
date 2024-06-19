@@ -26,7 +26,7 @@ type HumanoidSubject = Subject & {
   playAction: (actionName: HumanoidActions) => void;
 };
 
-const basicMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000, wireframe: true });
+const basicMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
 
 const Humanoid = async ({ gltfLoader, gui, debug }: FoxOpts): Promise<HumanoidSubject> => {
   const gltf = await gltfLoader.loadAsync(HumanoidModel);

@@ -25,9 +25,9 @@ export default class Mouse {
     if (this.debug) {
       this.debugMesh = new THREE.Mesh(
         new THREE.CircleGeometry(0.1),
-        new THREE.MeshBasicMaterial({ color: 0xff0000, wireframe: true }),
+        new THREE.MeshBasicMaterial({ color: 0x555555 }),
       );
-      this.debugMesh.rotateX(Math.PI / 2);
+      this.debugMesh.rotateX(-(Math.PI / 2));
       this.debugMesh.visible = false;
       this.scene.add(this.debugMesh);
     }
