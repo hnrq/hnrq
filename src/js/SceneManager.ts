@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { type Subject } from './world';
+import { EffectComposer, OutlinePass, RenderPass } from 'three/examples/jsm/Addons.js';
 
 interface SceneManagerOpts {
   subjects: Subject[];
@@ -31,13 +32,31 @@ const SceneManager = (opts: SceneManagerOpts = { subjects: [] }) => {
 
   camera.position.set(8, 8, 3);
 
+  const composer = new EffectComposer(renderer);
+
+  const renderPass = new RenderPass(scene, camera);
+  composer.addPass(renderPass);
+
+  const outlinePass = new OutlinePass(
+    new THREE.Vector2(window.innerWidth, window.innerHeight),
+    scene,
+    camera,
+    [subjects[0].mesh, subjects[2].mesh],
+  );
+  outlinePass.edgeStrength = 2;
+  outlinePass.edgeThickness = 0.05;
+  outlinePass.visibleEdgeColor.set(0xffffff);
+  outlinePass.hiddenEdgeColor.set(0x0000000);
+  composer.addPass(outlinePass);
+
   return {
+    renderer,
     camera,
     scene,
     update: () => {
       const delta = clock.getDelta();
       subjects.forEach(({ update }) => update?.(delta));
-      renderer.render(scene, camera);
+      composer.render(delta);
       return delta;
     },
     addSubject: (subject: Subject) => {
@@ -52,6 +71,7 @@ const SceneManager = (opts: SceneManagerOpts = { subjects: [] }) => {
       camera.updateProjectionMatrix();
 
       renderer.setSize(screenDimensions.width, screenDimensions.height);
+      composer.setSize(screenDimensions.width, screenDimensions.height);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     },
   };

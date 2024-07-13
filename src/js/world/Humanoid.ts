@@ -6,10 +6,11 @@ import CrossfadeMixer from '@js/utils/CrossfadeMixer';
 import type GUI from 'lil-gui';
 import type { Subject } from '.';
 
-interface FoxOpts {
+interface HumanoidOpts {
   gltfLoader: GLTFLoader;
   gui: GUI;
   debug?: boolean;
+  material: THREE.Material;
 }
 
 export type HumanoidActions =
@@ -26,12 +27,15 @@ type HumanoidSubject = Subject & {
   playAction: (actionName: HumanoidActions) => void;
 };
 
-const basicMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
-
-const Humanoid = async ({ gltfLoader, gui, debug }: FoxOpts): Promise<HumanoidSubject> => {
+const Humanoid = async ({
+  gltfLoader,
+  gui,
+  debug,
+  material,
+}: HumanoidOpts): Promise<HumanoidSubject> => {
   const gltf = await gltfLoader.loadAsync(HumanoidModel);
   gltf.scene.traverse((child) => {
-    if ((child as THREE.Mesh).isMesh) (child as THREE.Mesh).material = basicMaterial;
+    if ((child as THREE.Mesh).isMesh) (child as THREE.Mesh).material = material;
   });
   const mesh = gltf.scene;
   mesh.position.set(0, 0, -2);

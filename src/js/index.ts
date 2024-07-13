@@ -8,12 +8,10 @@ import { GLTFLoader } from 'three/examples/jsm/Addons.js';
 import { DEBUG } from './debug';
 import Mouse from './utils/Mouse';
 import Floor from './world/Floor';
+import basicMaterial from './materials/Basic';
 import IsometricCharacterControls from './utils/IsometricCharacterControls';
 
-const mesh = new THREE.Mesh(
-  new THREE.BoxGeometry(1, 1, 1),
-  new THREE.MeshBasicMaterial({ color: 0xff0000, wireframe: true }),
-);
+const mesh = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), basicMaterial);
 
 mesh.position.set(0, 0, -2);
 
@@ -21,7 +19,7 @@ const { loadingManager } = LoadingBar();
 const gltfLoader = new GLTFLoader(loadingManager);
 
 const floor = Floor();
-const humanoid = await Humanoid({ gltfLoader, gui, debug: DEBUG });
+const humanoid = await Humanoid({ gltfLoader, gui, debug: DEBUG, material: basicMaterial });
 
 const sceneManager = SceneManager({ subjects: [humanoid, floor, { mesh }] });
 sceneManager.camera.lookAt(humanoid.mesh.position);
