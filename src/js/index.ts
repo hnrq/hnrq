@@ -21,18 +21,23 @@ const gltfLoader = new GLTFLoader(loadingManager);
 const floor = Floor();
 const humanoid = await Humanoid({ gltfLoader, gui, debug: DEBUG, material: basicMaterial });
 
-const sceneManager = SceneManager({ subjects: [humanoid, floor, { mesh }] });
+const sceneManager = new SceneManager([humanoid, floor, { mesh }]);
 sceneManager.camera.lookAt(humanoid.mesh.position);
-const mouse = new Mouse({ camera: sceneManager.camera, scene: sceneManager.scene, debug: DEBUG });
-
-const controls = IsometricCharacterControls({
-  model: humanoid.mesh,
-  floor: floor.mesh,
+const mouse = new Mouse({
   camera: sceneManager.camera,
-  cameraFollow: true,
-  mouse,
-  onActionChange: (action) => humanoid.playAction(action),
+  scene: sceneManager.scene,
+  debug: DEBUG,
+  canvas: sceneManager.renderer.domElement,
 });
+
+const controls = new IsometricCharacterControls(
+  humanoid.mesh,
+  floor.mesh,
+  sceneManager.camera,
+  (action) => humanoid.playAction(action),
+  mouse,
+  true,
+);
 
 window.addEventListener('resize', () => {
   sceneManager.onWindowResize();

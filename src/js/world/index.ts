@@ -1,6 +1,6 @@
-import { Object3D } from 'three';
+import { Mesh } from 'three';
 
 export interface Subject {
-  mesh: Object3D;
+  mesh: Mesh;
   update?: (deltaTime: number) => void;
 }

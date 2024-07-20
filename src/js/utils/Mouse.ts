@@ -4,6 +4,7 @@ interface MouseOpts {
   camera: THREE.Camera;
   scene: THREE.Scene;
   debug: boolean;
+  canvas: HTMLCanvasElement;
 }
 
 export default class Mouse {
@@ -17,7 +18,7 @@ export default class Mouse {
   private animationFrameID: number | undefined;
   private position = new THREE.Vector2();
 
-  constructor({ camera, debug, scene }: MouseOpts) {
+  constructor({ camera, debug, scene, canvas }: MouseOpts) {
     this.debug = debug;
     this.camera = camera;
     this.scene = scene;
@@ -32,18 +33,18 @@ export default class Mouse {
       this.scene.add(this.debugMesh);
     }
 
-    window.addEventListener('pointerdown', (event) => {
+    canvas.addEventListener('pointerdown', (event) => {
       this.pressed = true;
       this.updatePosition(event);
       if (this.debugMesh) this.debugMesh.visible = true;
     });
-    window.addEventListener('pointerup', () => {
+    canvas.addEventListener('pointerup', () => {
       this.pressed = false;
       if (this.animationFrameID) cancelAnimationFrame(this.animationFrameID);
       if (this.debugMesh) this.debugMesh.visible = false;
     });
 
-    window.addEventListener('pointermove', (event) => {
+    canvas.addEventListener('pointermove', (event) => {
       if (this.pressed) this.updatePosition(event);
     });
   }

@@ -22,10 +22,10 @@ export type HumanoidActions =
   | 'Sit to Stand'
   | 'Stand to Sit';
 
-type HumanoidSubject = Subject & {
-  mixer: ReturnType<typeof CrossfadeMixer>;
+interface HumanoidSubject extends Subject {
+  mixer: CrossfadeMixer;
   playAction: (actionName: HumanoidActions) => void;
-};
+}
 
 const Humanoid = async ({
   gltfLoader,
@@ -39,16 +39,16 @@ const Humanoid = async ({
   });
   const mesh = gltf.scene;
   mesh.position.set(0, 0, -2);
-  const mixer = CrossfadeMixer(mesh, gltf.animations);
+  const mixer = new CrossfadeMixer(mesh, gltf.animations);
 
   if (debug) mixer.createPanel(gui);
 
   return {
-    mesh,
+    mesh: mesh as unknown as THREE.Mesh,
     mixer,
     playAction: (action: HumanoidActions) => mixer.playAction(action),
     update: (deltaTime) => {
-      mixer.mixer.update(deltaTime);
+      mixer.update(deltaTime);
     },
   };
 };

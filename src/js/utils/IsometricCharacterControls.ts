@@ -3,68 +3,60 @@ import type Mouse from './Mouse';
 
 type Actions = 'Idle' | 'Walk' | 'Run';
 
-interface IsometricCharacterControlsOpts {
-  model: THREE.Object3D;
-  floor: THREE.Object3D;
-  camera: THREE.Camera;
-  onActionChange: (action: Actions) => void;
-  mouse: Mouse;
-  cameraFollow?: boolean;
-}
-
 const RUN_VELOCITY = 6;
 const WALK_VELOCITY = 2;
 
-const IsometricCharacterControls = ({
-  model,
-  floor,
-  camera,
-  onActionChange,
-  mouse,
-  cameraFollow,
-}: IsometricCharacterControlsOpts) => {
-  let currentAction: Actions = 'Idle';
-  const update = (deltaTime: number) => {
-    if (!mouse.pressed && currentAction !== 'Idle') {
-      currentAction = 'Idle';
-      return onActionChange('Idle');
+class IsometricCharacterControls {
+  private currentAction: Actions = 'Idle';
+
+  constructor(
+    private model: THREE.Object3D,
+    private floor: THREE.Object3D,
+    private camera: THREE.Camera,
+    private onActionChange: (action: Actions) => void,
+    private mouse: Mouse,
+    private cameraFollow?: boolean,
+  ) {}
+
+  public update = (deltaTime: number) => {
+    if (!this.mouse.pressed && this.currentAction !== 'Idle') {
+      this.currentAction = 'Idle';
+      this.onActionChange('Idle');
     }
-    if (!mouse.pressed) return;
-    const intersects = mouse.raycaster.intersectObject(floor);
+    if (!this.mouse.pressed) return;
+    const intersects = this.mouse.raycaster.intersectObject(this.floor);
     if (intersects.length === 0) return;
     const mousePosition = intersects[0].point;
-    const mouseToModelDistance = model.position.distanceTo(mousePosition);
+    const mouseToModelDistance = this.model.position.distanceTo(mousePosition);
 
     const newAction =
       mouseToModelDistance < 0.02 ? 'Idle' : mouseToModelDistance < 3 ? 'Walk' : 'Run';
 
-    if (newAction !== currentAction) {
-      onActionChange(newAction);
-      currentAction = newAction;
+    if (newAction !== this.currentAction) {
+      this.onActionChange(newAction);
+      this.currentAction = newAction;
     }
 
-    if (currentAction == 'Run' || currentAction == 'Walk') {
-      model.lookAt(mousePosition);
+    if (this.currentAction == 'Run' || this.currentAction == 'Walk') {
+      this.model.lookAt(mousePosition);
 
-      const velocity = currentAction == 'Run' ? RUN_VELOCITY : WALK_VELOCITY;
-      const direction = model.position.clone().sub(mousePosition).normalize();
+      const velocity = this.currentAction == 'Run' ? RUN_VELOCITY : WALK_VELOCITY;
+      const direction = this.model.position.clone().sub(mousePosition).normalize();
 
       const moveX = -(direction.x * velocity * deltaTime);
       const moveZ = -(direction.z * velocity * deltaTime);
 
-      model.position.x += moveX;
-      model.position.z += moveZ;
+      this.model.position.x += moveX;
+      this.model.position.z += moveZ;
 
-      if (cameraFollow) updateCameraPosition(moveX, moveZ);
+      if (this.cameraFollow) this.updateCameraPosition(moveX, moveZ);
     }
   };
 
-  const updateCameraPosition = (moveX: number, moveZ: number) => {
-    camera.position.x += moveX;
-    camera.position.z += moveZ;
+  private updateCameraPosition = (moveX: number, moveZ: number) => {
+    this.camera.position.x += moveX;
+    this.camera.position.z += moveZ;
   };
-
-  return { update };
-};
+}
 
 export default IsometricCharacterControls;
