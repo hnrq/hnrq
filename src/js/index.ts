@@ -5,7 +5,6 @@ import Humanoid from './world/Humanoid';
 import LoadingBar from './utils/LoadingBar';
 
 import { GLTFLoader } from 'three/examples/jsm/Addons.js';
-import { DEBUG } from './debug';
 import Mouse from './utils/Mouse';
 import Floor from './world/Floor';
 import basicMaterial from './materials/Basic';
@@ -19,14 +18,19 @@ const { loadingManager } = LoadingBar();
 const gltfLoader = new GLTFLoader(loadingManager);
 
 const floor = Floor();
-const humanoid = await Humanoid({ gltfLoader, gui, debug: DEBUG, material: basicMaterial });
+const humanoid = await Humanoid({
+  gltfLoader,
+  gui,
+  debug: import.meta.env.VITE_DEBUG,
+  material: basicMaterial,
+});
 
 const sceneManager = new SceneManager([humanoid, floor, { mesh }]);
 sceneManager.camera.lookAt(humanoid.mesh.position);
 const mouse = new Mouse({
   camera: sceneManager.camera,
   scene: sceneManager.scene,
-  debug: DEBUG,
+  debug: import.meta.env.VITE_DEBUG,
   canvas: sceneManager.renderer.domElement,
 });
 

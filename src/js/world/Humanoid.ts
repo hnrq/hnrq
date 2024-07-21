@@ -15,17 +15,58 @@ interface HumanoidOpts {
 
 export type HumanoidActions =
   | 'None'
+  | 'Dance'
   | 'Idle'
-  | 'Walk'
-  | 'Run'
+  | 'Idle to Push-up'
   | 'Open Door'
+  | 'Push-up'
+  | 'Push-up to idle'
+  | 'Run'
   | 'Sit to Stand'
-  | 'Stand to Sit';
+  | 'Sitting'
+  | 'Stand to Sit'
+  | 'Typing'
+  | 'Walk';
 
 interface HumanoidSubject extends Subject {
-  mixer: CrossfadeMixer;
+  mixer: CrossfadeMixer<HumanoidActions>;
   playAction: (actionName: HumanoidActions) => void;
 }
+
+const createHumanoidActionsGUI = (crossfadeMixer: CrossfadeMixer<HumanoidActions>, gui: GUI) => {
+  const folder = gui.addFolder('Humanoid');
+  const actions = {
+    'Do push-ups': () => crossfadeMixer.playAction('Idle to Push-up'),
+    'Sit down': () => crossfadeMixer.playAction('Stand to Sit'),
+  };
+  for (const action in actions) folder.add(actions, action);
+};
+
+const setupActions = ({ mixer, actions, playActionNoFade }: CrossfadeMixer<HumanoidActions>) => {
+  (
+    [
+      'Idle to Push-up',
+      'Push-up to idle',
+      'Sit to Stand',
+      'Stand to Sit',
+      'Open Door',
+    ] as HumanoidActions[]
+  ).forEach((actionName) => {
+    actions[actionName].loop = THREE.LoopOnce;
+  });
+
+  mixer.addEventListener('finished', (e) => {
+    console.log(e.action.getClip().name);
+    switch (e.action.getClip().name) {
+      case 'Idle to Push-up':
+        return playActionNoFade('Push-up');
+      case 'Stand to Sit':
+        return playActionNoFade('Sitting');
+      default:
+        return playActionNoFade('Idle');
+    }
+  });
+};
 
 const Humanoid = async ({
   gltfLoader,
@@ -39,16 +80,21 @@ const Humanoid = async ({
   });
   const mesh = gltf.scene;
   mesh.position.set(0, 0, -2);
-  const mixer = new CrossfadeMixer(mesh, gltf.animations);
+  const crossfadeMixer = new CrossfadeMixer<HumanoidActions>(mesh, gltf.animations, 'Idle');
 
-  if (debug) mixer.createPanel(gui);
+  setupActions(crossfadeMixer);
+
+  if (debug) {
+    createHumanoidActionsGUI(crossfadeMixer, gui);
+    crossfadeMixer.createPanel(gui);
+  }
 
   return {
     mesh: mesh as unknown as THREE.Mesh,
-    mixer,
-    playAction: (action: HumanoidActions) => mixer.playAction(action),
+    mixer: crossfadeMixer,
+    playAction: (action: HumanoidActions) => crossfadeMixer.playAction(action),
     update: (deltaTime) => {
-      mixer.update(deltaTime);
+      crossfadeMixer.update(deltaTime);
     },
   };
 };

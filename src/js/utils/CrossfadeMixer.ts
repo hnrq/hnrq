@@ -1,66 +1,58 @@
 import type { Controller, GUI } from 'lil-gui';
 import * as THREE from 'three';
 
-export type ActionsByName = Record<string, { weight: number; action: THREE.AnimationAction }>;
+export type ActionsByName<K extends string> = Record<K, THREE.AnimationAction>;
 
 const FADE_DURATION = 0.35;
-
-const setWeight = (action: THREE.AnimationAction, weight: number) => {
-  action.enabled = true;
-  action.setEffectiveTimeScale(1);
-  action.setEffectiveWeight(weight);
-};
 
 interface CrossFadeMixerOpts {
   fadeDuration: number;
 }
 
-class CrossfadeMixer {
+class CrossfadeMixer<K extends string> {
   private animationControllers: Controller[] = [];
-  private actions: ActionsByName = {};
-  private currentActionName: string;
-  private mixer: THREE.AnimationMixer;
+  private currentActionName: K;
+  #mixer: THREE.AnimationMixer;
+  #actions: ActionsByName<K> = {} as ActionsByName<K>;
+
+  get actions() {
+    return this.#actions;
+  }
+
+  get mixer() {
+    return this.#mixer;
+  }
 
   constructor(
     private model: THREE.Group,
     private animations: THREE.AnimationClip[],
+    startingAction: K = animations[0].name as K,
     private opts: CrossFadeMixerOpts = { fadeDuration: FADE_DURATION },
   ) {
-    this.mixer = new THREE.AnimationMixer(model);
-    this.currentActionName = animations[0].name;
-    this.animations.forEach((animation, index) => {
-      const action = this.mixer.clipAction(animation);
-      this.actions[animation.name] = { weight: index === 0 ? 1 : 0, action };
-      this.activateAction(action);
+    this.#mixer = new THREE.AnimationMixer(model);
+    this.currentActionName = startingAction;
+    this.animations.forEach((animation) => {
+      const action = this.#mixer.clipAction(animation);
+      this.#actions[animation.name as K] = action;
     });
+
+    this.playAction(startingAction);
   }
 
-  public playAction = (actionName: string) => {
-    this.prepareCrossFade(
-      this.actions[this.currentActionName]?.action,
-      this.actions[actionName]?.action,
-      this.opts.fadeDuration,
-    );
+  public playActionNoFade = (actionName: K) => {
+    this.#actions[actionName].reset().setEffectiveTimeScale(1).setEffectiveWeight(1).play();
+    this.currentActionName = actionName;
+    this.toggleButtonStyling();
   };
 
-  private activateAction = (action: THREE.AnimationAction) => {
-    const clip = action.getClip();
-    setWeight(action, this.actions[clip.name].weight);
-    action.play();
-  };
+  public playAction = (actionName: K, duration = this.opts.fadeDuration) => {
+    const previousAction = this.#actions[this.currentActionName];
+    const activeAction = this.#actions[actionName];
 
-  private executeCrossFade = (
-    startAction: THREE.AnimationAction,
-    endAction: THREE.AnimationAction,
-    duration: number,
-  ) => {
-    if (endAction) {
-      setWeight(endAction, 1);
-      endAction.time = 0;
+    if (previousAction !== activeAction) previousAction.fadeOut(duration);
 
-      if (startAction) startAction.crossFadeTo(endAction, duration, true);
-      else endAction.fadeIn(duration);
-    } else startAction.fadeOut(duration);
+    activeAction.reset().setEffectiveTimeScale(1).setEffectiveWeight(1).fadeIn(duration).play();
+    this.currentActionName = actionName;
   };
 
   private toggleButtonStyling = () => {
@@ -71,34 +63,19 @@ class CrossfadeMixer {
     });
   };
 
-  private prepareCrossFade = (
-    startAction: THREE.AnimationAction,
-    endAction: THREE.AnimationAction,
-    duration: number,
-  ) => {
-    this.executeCrossFade(startAction, endAction, duration);
-    this.currentActionName = endAction?.getClip().name ?? 'None';
-  };
-
   public createPanel = (gui: GUI) => {
-    const panel = gui.addFolder(`${this.model.name} Animations`);
+    const panel = gui.addFolder(`${this.model.name} Individual Animations`);
     const panelSettings: Record<string, () => void> = {};
 
-    ['None', ...Object.keys(this.actions)].forEach((actionName) => {
-      panelSettings[actionName] = () => {
-        const currentAction = this.actions[this.currentActionName]?.action ?? null;
-        const action = this.actions[actionName]?.action ?? null;
-
-        if (currentAction !== action) this.playAction(actionName);
-      };
-
+    ['None', ...Object.keys(this.#actions)].forEach((actionName) => {
+      panelSettings[actionName] = () => this.playAction(actionName as K);
       this.animationControllers.push(panel.add(panelSettings, actionName));
     });
 
     this.toggleButtonStyling();
   };
 
-  public update = (deltaTime: number) => this.mixer.update(deltaTime);
+  public update = (deltaTime: number) => this.#mixer.update(deltaTime);
 }
 
 export default CrossfadeMixer;

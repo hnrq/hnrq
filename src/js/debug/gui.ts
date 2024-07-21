@@ -1,6 +1,5 @@
 import GUI from 'lil-gui';
-import { DEBUG } from '.';
 
-const gui = new GUI({ autoPlace: DEBUG });
+const gui = new GUI({ autoPlace: import.meta.env.VITE_DEBUG });
 
 export default gui;
