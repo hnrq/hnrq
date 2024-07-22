@@ -42,7 +42,12 @@ const createHumanoidActionsGUI = (crossfadeMixer: CrossfadeMixer<HumanoidActions
   for (const action in actions) folder.add(actions, action);
 };
 
-const setupActions = ({ mixer, actions, playActionNoFade }: CrossfadeMixer<HumanoidActions>) => {
+const setupActions = ({
+  mixer,
+  actions,
+  playAction,
+  playActionNoFade,
+}: CrossfadeMixer<HumanoidActions>) => {
   (
     [
       'Idle to Push-up',
@@ -63,7 +68,7 @@ const setupActions = ({ mixer, actions, playActionNoFade }: CrossfadeMixer<Human
       case 'Stand to Sit':
         return playActionNoFade('Sitting');
       default:
-        return playActionNoFade('Idle');
+        return playAction('Idle');
     }
   });
 };

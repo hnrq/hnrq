@@ -40,6 +40,7 @@ class CrossfadeMixer<K extends string> {
   }
 
   public playActionNoFade = (actionName: K) => {
+    this.#actions[this.currentActionName].stop();
     this.#actions[actionName].reset().setEffectiveTimeScale(1).setEffectiveWeight(1).play();
     this.currentActionName = actionName;
     this.toggleButtonStyling();
@@ -50,7 +51,6 @@ class CrossfadeMixer<K extends string> {
     const activeAction = this.#actions[actionName];
 
     if (previousAction !== activeAction) previousAction.fadeOut(duration);
-
     activeAction.reset().setEffectiveTimeScale(1).setEffectiveWeight(1).fadeIn(duration).play();
     this.currentActionName = actionName;
   };
