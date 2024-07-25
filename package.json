@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "lint": "eslint --fix",
     "preview": "vite preview",
     "prepare": "husky && husky install"
   },
@@ -13,21 +14,19 @@
     "@eslint/js": "^9.7.0",
     "@gltf-transform/functions": "^4.0.8",
     "@types/eslint__js": "^8.42.3",
+    "@types/three": "^0.166.0",
     "eslint": "^9.7.0",
     "husky": "^9.1.1",
+    "lint-staged": "^15.2.7",
     "prettier": "^3.3.3",
-    "typescript": "^5.5.3",
-    "typescript-eslint": "^7.16.1",
+    "typescript": "^5.5.4",
+    "typescript-eslint": "8.0.0-alpha.10",
     "vite": "^5.3.4",
     "vite-plugin-gltf": "^4.0.0",
     "vite-tsconfig-paths": "^4.3.2"
   },
   "dependencies": {
-    "-": "^0.0.1",
-    "@types/three": "^0.166.0",
     "lil-gui": "^0.19.2",
-    "lint-staged": "^15.2.7",
-    "nipplejs": "^0.10.2",
     "three": "^0.166.1"
   },
   "lint-staged": {
