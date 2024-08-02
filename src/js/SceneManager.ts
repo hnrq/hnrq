@@ -1,5 +1,4 @@
 import * as THREE from 'three';
-import { EffectComposer, OutlinePass, RenderPass } from 'three/examples/jsm/Addons.js';
 
 interface Subject {
   mesh: THREE.Mesh;
@@ -12,7 +11,6 @@ class SceneManager {
   #camera: THREE.PerspectiveCamera;
   private clock = new THREE.Clock();
   private screenDimensions: { width: number; height: number };
-  private composer: EffectComposer;
 
   constructor(private subjects: Subject[]) {
     document.body.appendChild(this.#renderer.domElement);
@@ -34,29 +32,12 @@ class SceneManager {
     );
 
     this.#camera.position.set(8, 8, 3);
-
-    this.composer = new EffectComposer(this.#renderer);
-
-    const renderPass = new RenderPass(this.#scene, this.#camera);
-    this.composer.addPass(renderPass);
-
-    const outlinePass = new OutlinePass(
-      new THREE.Vector2(window.innerWidth, window.innerHeight),
-      this.#scene,
-      this.#camera,
-      [this.subjects[0].mesh, this.subjects[2].mesh],
-    );
-    outlinePass.edgeStrength = 2;
-    outlinePass.edgeThickness = 0.05;
-    outlinePass.visibleEdgeColor.set(0xffffff);
-    outlinePass.hiddenEdgeColor.set(0x0000000);
-    this.composer.addPass(outlinePass);
   }
 
   public update = () => {
     const delta = this.clock.getDelta();
     this.subjects.forEach(({ update }) => update?.(delta));
-    this.composer.render(delta);
+    this.renderer.render(this.#scene, this.#camera);
     return delta;
   };
 
@@ -73,7 +54,6 @@ class SceneManager {
     this.#camera.updateProjectionMatrix();
 
     this.#renderer.setSize(this.screenDimensions.width, this.screenDimensions.height);
-    this.composer.setSize(this.screenDimensions.width, this.screenDimensions.height);
     this.#renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   };
 

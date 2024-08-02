@@ -1,3 +1,3 @@
 import * as THREE from 'three';
 
-export default new THREE.MeshBasicMaterial({ color: 0x000 });
+export default new THREE.MeshBasicMaterial({ color: 0xfff });

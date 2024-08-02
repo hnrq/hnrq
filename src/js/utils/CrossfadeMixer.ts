@@ -39,19 +39,14 @@ class CrossfadeMixer<K extends string> {
     this.playAction(startingAction);
   }
 
-  public playActionNoFade = (actionName: K) => {
-    this.#actions[this.currentActionName].stop();
-    this.#actions[actionName].reset().setEffectiveTimeScale(1).setEffectiveWeight(1).play();
-    this.currentActionName = actionName;
-    this.toggleButtonStyling();
-  };
-
   public playAction = (actionName: K, duration = this.opts.fadeDuration) => {
-    const previousAction = this.#actions[this.currentActionName];
-    const activeAction = this.#actions[actionName];
-
-    if (previousAction !== activeAction) previousAction.fadeOut(duration);
-    activeAction.reset().setEffectiveTimeScale(1).setEffectiveWeight(1).fadeIn(duration).play();
+    this.#actions[this.currentActionName].fadeOut(duration);
+    this.#actions[actionName]
+      .reset()
+      .setEffectiveTimeScale(1)
+      .setEffectiveWeight(1)
+      .fadeIn(duration)
+      .play();
     this.currentActionName = actionName;
   };
 

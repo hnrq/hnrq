@@ -19,6 +19,7 @@ export type HumanoidActions =
 
 export interface Context {
   currentAction: HumanoidActions;
+  velocity: number;
 }
 
 export type Events =
@@ -28,11 +29,10 @@ export type Events =
   | { type: 'walk' }
   | { type: 'do push-ups' };
 
-const setupHumanoidMachine = ({
-  mixer,
-  actions,
-  playActionNoFade,
-}: CrossfadeMixer<HumanoidActions>) => {
+const RUN_VELOCITY = 6;
+const WALK_VELOCITY = 2;
+
+const setupHumanoidMachine = ({ mixer, playAction, actions }: CrossfadeMixer<HumanoidActions>) => {
   (
     [
       'Idle to Push-up',
@@ -55,7 +55,7 @@ const setupHumanoidMachine = ({
       playUninterruptableAction: fromPromise(
         async ({ input }: { input: { action: HumanoidActions } }) =>
           new Promise((resolve) => {
-            playActionNoFade(input?.action);
+            playAction(input?.action);
             const callback = () => {
               mixer.removeEventListener('finished', callback);
               resolve(undefined);
@@ -67,7 +67,7 @@ const setupHumanoidMachine = ({
   }).createMachine({
     id: 'humanoid-actions',
     initial: 'Idle',
-    context: { currentAction: 'Idle' },
+    context: { currentAction: 'Idle', velocity: 0 },
     states: {
       Idle: {
         entry: assign({ currentAction: 'Idle' }),
@@ -79,7 +79,8 @@ const setupHumanoidMachine = ({
         },
       },
       Walking: {
-        entry: assign({ currentAction: 'Walking' }),
+        entry: assign({ currentAction: 'Walking', velocity: WALK_VELOCITY }),
+        exit: assign({ velocity: 0 }),
         on: {
           run: { target: 'Running' },
           stop: { target: 'Idle' },
@@ -87,7 +88,8 @@ const setupHumanoidMachine = ({
         },
       },
       Running: {
-        entry: assign({ currentAction: 'Running' }),
+        entry: assign({ currentAction: 'Running', velocity: RUN_VELOCITY }),
+        exit: assign({ velocity: 0 }),
         on: {
           walk: { target: 'Walking' },
           stop: { target: 'Idle' },
@@ -129,7 +131,6 @@ const setupHumanoidMachine = ({
       },
       'Pushing-up': {
         initial: 'Idle to Push-up',
-        always: { target: 'Idle' },
         states: {
           'Idle to Push-up': {
             entry: assign({ currentAction: 'Idle to Push-up' }),

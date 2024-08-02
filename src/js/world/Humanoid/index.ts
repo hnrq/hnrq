@@ -1,6 +1,5 @@
 import * as THREE from 'three';
 
-import type { GLTFLoader } from 'three/examples/jsm/Addons.js';
 import HumanoidModel from '@resources/models/Humanoid.glb';
 import type GUI from 'lil-gui';
 import CrossfadeMixer from '@js/utils/CrossfadeMixer';
@@ -8,20 +7,20 @@ import type { Subject } from '@js/types';
 import type { HumanoidActions } from './actions';
 import setupHumanoidMachine from './actions';
 import { Actor, createActor, type EventFromLogic } from 'xstate';
+import HumanoidControls from './controls';
+import type Mouse from '@js/utils/Mouse';
+import gltfLoader from '@js/utils/gltfLoader';
 
 interface HumanoidOpts {
-  gltfLoader: GLTFLoader;
   gui: GUI;
-  debug?: boolean;
+  mouse: Mouse;
+  intersectionObject: THREE.Mesh;
   material: THREE.Material;
+  camera?: THREE.Camera;
+  debug?: boolean;
 }
 
 export type Events = EventFromLogic<ReturnType<typeof setupHumanoidMachine>>['type'];
-
-interface HumanoidSubject extends Subject {
-  actor: Actor<ReturnType<typeof setupHumanoidMachine>>;
-  playAnimation: (animationEvent: Events) => void;
-}
 
 const createHumanoidActionsGUI = (
   machine: Actor<ReturnType<typeof setupHumanoidMachine>>,
@@ -36,43 +35,69 @@ const createHumanoidActionsGUI = (
   for (const action in actions) folder.add(actions, action);
 };
 
-const Humanoid = async ({
-  gltfLoader,
-  gui,
-  debug,
-  material,
-}: HumanoidOpts): Promise<HumanoidSubject> => {
-  const gltf = await gltfLoader.loadAsync(HumanoidModel);
+const model = await gltfLoader.loadAsync(HumanoidModel);
 
-  gltf.scene.traverse((child) => {
-    if ((child as THREE.Mesh).isMesh) (child as THREE.Mesh).material = material;
-  });
-  const mesh = gltf.scene;
-  mesh.position.set(0, 0, -2);
-  const crossfadeMixer = new CrossfadeMixer<HumanoidActions>(mesh, gltf.animations, 'Idle');
+export default class Humanoid implements Subject {
+  #mesh: THREE.Group<THREE.Object3DEventMap>;
+  #actor: Actor<ReturnType<typeof setupHumanoidMachine>>;
+  #crossfadeMixer: CrossfadeMixer<HumanoidActions>;
+  #controls: HumanoidControls;
+  #camera?: THREE.Camera;
+  #previousSnapshot?: ReturnType<Actor<ReturnType<typeof setupHumanoidMachine>>['getSnapshot']>;
 
-  const machine = setupHumanoidMachine(crossfadeMixer);
+  constructor({ gui, debug, mouse, intersectionObject, camera, material }: HumanoidOpts) {
+    this.#mesh = model.scene;
+    this.#mesh.position.set(0, 0, -2);
+    this.#camera = camera;
+    this.#crossfadeMixer = new CrossfadeMixer<HumanoidActions>(
+      this.#mesh,
+      model.animations,
+      'Idle',
+    );
+    this.#actor = createActor(setupHumanoidMachine(this.#crossfadeMixer)).start();
+    this.#controls = new HumanoidControls(
+      this.#mesh,
+      intersectionObject,
+      (type: Events) => this.#actor.send({ type }),
+      mouse,
+    );
 
-  const actor = createActor(machine).start();
-  actor.subscribe((state) => {
-    console.log(state.context.currentAction);
-    if (state.context.noFade) crossfadeMixer.playActionNoFade(state.context.currentAction);
-    else crossfadeMixer.playAction(state.context.currentAction);
-  });
+    this.#mesh.traverse((child) => {
+      if ((child as THREE.Mesh).isMesh) (child as THREE.Mesh).material = material;
+    });
 
-  if (debug) {
-    createHumanoidActionsGUI(actor, gui);
-    crossfadeMixer.createPanel(gui);
+    this.#actor.subscribe((state) => {
+      if (state.context.currentAction === this.#previousSnapshot?.context.currentAction) return;
+
+      this.#crossfadeMixer.playAction(state.context.currentAction);
+      this.#previousSnapshot = state;
+    });
+
+    if (debug) {
+      createHumanoidActionsGUI(this.#actor, gui);
+      this.#crossfadeMixer.createPanel(gui);
+    }
   }
 
-  return {
-    mesh: mesh as unknown as THREE.Mesh,
-    actor,
-    playAnimation: (type: Events) => actor.send({ type }),
-    update: (deltaTime) => {
-      crossfadeMixer.update(deltaTime);
-    },
+  public playAnimation = (type: Events) => {
+    this.#actor.send({ type });
   };
-};
 
-export default Humanoid;
+  public update = (deltaTime: number) => {
+    this.#crossfadeMixer.update(deltaTime);
+    const offset = this.#controls.update(deltaTime, this.#previousSnapshot?.context.velocity ?? 0);
+
+    if (offset && this.#camera) {
+      this.#camera.position.x += offset.x;
+      this.#camera.position.z += offset.z;
+    }
+  };
+
+  get mesh() {
+    return this.#mesh as unknown as THREE.Mesh;
+  }
+
+  get actor() {
+    return this.#actor;
+  }
+}
