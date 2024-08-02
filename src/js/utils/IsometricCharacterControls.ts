@@ -1,46 +1,45 @@
 import * as THREE from 'three';
 import type Mouse from './Mouse';
-
-type Actions = 'Idle' | 'Walk' | 'Run';
+import type { Events } from '@js/world/Humanoid';
+import type { HumanoidActions } from '@js/world/Humanoid/actions';
 
 const RUN_VELOCITY = 6;
 const WALK_VELOCITY = 2;
 
 class IsometricCharacterControls {
-  private currentAction: Actions = 'Idle';
+  lastEvent: Events = 'stop';
+  #currentAction: HumanoidActions;
 
   constructor(
     private model: THREE.Object3D,
     private floor: THREE.Object3D,
-    private camera: THREE.Camera,
-    private onActionChange: (action: Actions) => void,
+    private changeEvent: (action: Events) => void,
     private mouse: Mouse,
-    private cameraFollow?: boolean,
   ) {}
 
+  set currentAction(action: HumanoidActions) {
+    this.#currentAction = action;
+  }
+
   public update = (deltaTime: number) => {
-    if (!this.mouse.pressed && this.currentAction !== 'Idle') {
-      this.currentAction = 'Idle';
-      this.onActionChange('Idle');
-    }
-    if (!this.mouse.pressed) return;
+    if (!this.mouse.pressed) return this.playEvent('stop');
     const intersects = this.mouse.raycaster.intersectObject(this.floor);
     if (intersects.length === 0) return;
     const mousePosition = intersects[0].point;
     const mouseToModelDistance = this.model.position.distanceTo(mousePosition);
 
-    const newAction =
-      mouseToModelDistance < 0.02 ? 'Idle' : mouseToModelDistance < 3 ? 'Walk' : 'Run';
+    const newAction: Events =
+      mouseToModelDistance < 0.02 ? 'stop' : mouseToModelDistance < 3 ? 'walk' : 'run';
+    this.playEvent(newAction);
 
-    if (newAction !== this.currentAction) {
-      this.onActionChange(newAction);
-      this.currentAction = newAction;
-    }
-
-    if (this.currentAction == 'Run' || this.currentAction == 'Walk') {
+    if (
+      this.#currentAction === 'Idle' ||
+      this.#currentAction === 'Walking' ||
+      this.#currentAction === 'Running'
+    ) {
       this.model.lookAt(mousePosition);
 
-      const velocity = this.currentAction == 'Run' ? RUN_VELOCITY : WALK_VELOCITY;
+      const velocity = this.lastEvent === 'run' ? RUN_VELOCITY : WALK_VELOCITY;
       const direction = this.model.position.clone().sub(mousePosition).normalize();
 
       const moveX = -(direction.x * velocity * deltaTime);
@@ -49,13 +48,15 @@ class IsometricCharacterControls {
       this.model.position.x += moveX;
       this.model.position.z += moveZ;
 
-      if (this.cameraFollow) this.updateCameraPosition(moveX, moveZ);
+      return { moveX, moveZ };
     }
   };
 
-  private updateCameraPosition = (moveX: number, moveZ: number) => {
-    this.camera.position.x += moveX;
-    this.camera.position.z += moveZ;
+  private playEvent = (action: Events) => {
+    if (action !== this.lastEvent) {
+      this.changeEvent(action);
+      this.lastEvent = action;
+    }
   };
 }
 

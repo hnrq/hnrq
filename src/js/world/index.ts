@@ -1,6 +1,2 @@
-import { Mesh } from 'three';
-
-export interface Subject {
-  mesh: Mesh;
-  update?: (deltaTime: number) => void;
-}
+export { default as Floor } from './Floor';
+export { default as Humanoid } from './Humanoid';

@@ -2,20 +2,16 @@ import * as THREE from 'three';
 import gui from './debug/gui';
 import SceneManager from './SceneManager';
 import Humanoid from './world/Humanoid';
-import LoadingBar from './utils/LoadingBar';
 
-import { GLTFLoader } from 'three/examples/jsm/Addons.js';
 import Mouse from './utils/Mouse';
 import Floor from './world/Floor';
 import basicMaterial from './materials/Basic';
 import IsometricCharacterControls from './utils/IsometricCharacterControls';
+import gltfLoader from './utils/gltfLoader';
 
 const mesh = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), basicMaterial);
 
 mesh.position.set(0, 0, -2);
-
-const { loadingManager } = LoadingBar();
-const gltfLoader = new GLTFLoader(loadingManager);
 
 const floor = Floor();
 const humanoid = await Humanoid({
@@ -37,11 +33,13 @@ const mouse = new Mouse({
 const controls = new IsometricCharacterControls(
   humanoid.mesh,
   floor.mesh,
-  sceneManager.camera,
-  (action) => humanoid.playAction(action),
+  (action) => humanoid.playAnimation(action),
   mouse,
-  true,
 );
+
+humanoid.actor.subscribe((state) => {
+  controls.currentAction = state.context.currentAction;
+});
 
 window.addEventListener('resize', () => {
   sceneManager.onWindowResize();
@@ -51,7 +49,12 @@ const tick = () => {
   window.requestAnimationFrame(tick);
   const delta = sceneManager.update();
   mouse.update();
-  controls.update(delta);
+  const move = controls.update(delta);
+
+  if (move) {
+    sceneManager.camera.position.x += move.moveX;
+    sceneManager.camera.position.z += move.moveZ;
+  }
 };
 
 tick();
