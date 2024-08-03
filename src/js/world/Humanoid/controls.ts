@@ -20,7 +20,7 @@ export default class HumanoidControls {
     const mouseToModelDistance = this.model.position.distanceTo(mousePosition);
 
     const newEvent: Events =
-      mouseToModelDistance < 0.02 ? 'stop' : mouseToModelDistance < 3 ? 'walk' : 'run';
+      mouseToModelDistance < 0.5 ? 'stop' : mouseToModelDistance < 3 ? 'walk' : 'run';
     this.changeEvent(newEvent);
 
     if (velocity) {
