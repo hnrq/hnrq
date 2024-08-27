@@ -36,7 +36,7 @@ const setupHumanoidMachine = ({ mixer, playAction, actions }: CrossfadeMixer<Hum
   (
     [
       'Idle to Push-up',
-      'Push-up to idle',
+      'Push-up to Idle',
       'Sit to Stand',
       'Stand to Sit',
       'Open Door',
@@ -134,11 +134,11 @@ const setupHumanoidMachine = ({ mixer, playAction, actions }: CrossfadeMixer<Hum
         states: {
           'Idle to Push-up': {
             entry: assign({ currentAction: 'Idle to Push-up' }),
-            always: { target: 'Pushing-up' },
             invoke: {
               id: 'startPushUp',
               src: 'playUninterruptableAction',
               input: { action: 'Idle to Push-up' },
+              onDone: { target: 'Pushing-up' },
             },
           },
           'Pushing-up': {
