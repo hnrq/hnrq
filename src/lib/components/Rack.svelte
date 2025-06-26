@@ -1,34 +1,24 @@
 <script lang="ts">
-	import { T, useTask } from '@threlte/core';
-	import { get } from 'svelte/store';
+	import { T } from '@threlte/core';
 	import { projects, posts, links } from '$lib/data';
-	import { rackRotation } from '$lib/stores';
-	import CD from './CD.svelte';
-	import { type Group, MathUtils, type Object3DEventMap } from 'three';
+	import { rackRotation } from '$lib/stores/index.svelte';
+	import CDCase from './CDCase.svelte';
+	import { type Group, type Object3DEventMap } from 'three';
 
 	let rackRef: Group<Object3DEventMap> | undefined = $state();
 
-	// Smoothly animate the rack to the target rotation
-	useTask((delta) => {
-		if (!rackRef) return;
-
-		const currentRotation = rackRef.rotation.y;
-		const targetRotation = get(rackRotation);
-		rackRef.rotation.y = MathUtils.lerp(currentRotation, targetRotation, delta * 5);
-	});
-
-	const sideDistance = 1.5;
-	const cdSpacing = 1.0;
+	const sideDistance = 1.0;
+	const cdSpacing = 0.5;
 
 	const sides = [
-		{ title: 'Projects', items: projects },
-		{ title: 'Posts', items: posts },
-		{ title: 'Links', items: links },
+		{ title: 'Projects', items: Object.values(projects) },
+		{ title: 'Posts', items: Object.values(posts) },
+		{ title: 'Links', items: Object.values(links) },
 		{ title: 'Nothing', items: [] }
 	];
 </script>
 
-<T.Group bind:ref={rackRef}>
+<T.Group bind:ref={rackRef} position.z={-5} rotation.y={rackRotation.current}>
 	{#each sides as side, i (side.title)}
 		{@const angle = i * (Math.PI / 2)}
 		{@const xPos = Math.sin(angle) * sideDistance}
@@ -41,7 +31,7 @@
 			<!-- Render the CDs for the current side -->
 			{#each side.items as item, j (item.title)}
 				<T.Group position.y={startX + j * cdSpacing} rotation.x={Math.PI / 4}>
-					<CD {item} />
+					<CDCase {item} />
 				</T.Group>
 			{/each}
 		</T.Group>

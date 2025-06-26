@@ -1,1 +1,13 @@
 @import 'tailwindcss';
+
+body {
+	height: 100dvh;
+	width: 100dvw;
+	--parallax-x: 0;
+	--parallax-y: 0;
+	transform: translate(var(--parallax-x), var(--parallax-y));
+	overflow: hidden; /* Prevents scrollbars from appearing as layers move */
+	will-change: transform;
+
+	@apply bg-black;
+}

@@ -12,68 +12,68 @@ export interface PortfolioItem {
 // Helper to generate slugs
 const toSlug = (title: string) => title.toLowerCase().replace(/\s+/g, '-');
 
-export const projects: PortfolioItem[] = [
-	{
+export const projects: Record<string, PortfolioItem> = {
+	[toSlug('Project 1')]: {
 		title: 'Project 1',
 		cover: 'https://placehold.co/300x300/fbcfe8/4a044e?text=Project+1',
 		link: 'https://example.com/project1',
 		slug: toSlug('Project 1')
 	},
-	{
+	[toSlug('Project 2')]: {
 		title: 'Project 2',
 		cover: 'https://placehold.co/300x300/fbcfe8/4a044e?text=Project+2',
 		link: 'https://example.com/project2',
 		slug: toSlug('Project 2')
 	},
-	{
+	[toSlug('Project 3')]: {
 		title: 'Project 3',
 		cover: 'https://placehold.co/300x300/fbcfe8/4a044e?text=Project+3',
 		link: 'https://example.com/project3',
 		slug: toSlug('Project 3')
 	}
-];
+};
 
-export const posts: PortfolioItem[] = [
-	{
+export const posts: Record<string, PortfolioItem> = {
+	[toSlug('Post 1')]: {
 		title: 'Post 1',
 		cover: 'https://placehold.co/300x300/d1fae5/064e3b?text=Post+1',
 		link: 'https://dev.to/example/post1',
 		slug: toSlug('Post 1')
 	},
-	{
+	[toSlug('Post 2')]: {
 		title: 'Post 2',
 		cover: 'https://placehold.co/300x300/d1fae5/064e3b?text=Post+2',
 		link: 'https://dev.to/example/post2',
 		slug: toSlug('Post 2')
 	},
-	{
+	[toSlug('Post 3')]: {
 		title: 'Post 3',
 		cover: 'https://placehold.co/300x300/d1fae5/064e3b?text=Post+3',
 		link: 'https://dev.to/example/post3',
 		slug: toSlug('Post 3')
 	}
-];
+};
 
-export const links: PortfolioItem[] = [
-	{
+export const links: Record<string, PortfolioItem> = {
+	[toSlug('GitHub')]: {
 		title: 'GitHub',
 		cover: 'https://placehold.co/300x300/e0e7ff/1e1b4b?text=GitHub',
 		link: 'https://github.com/example',
 		slug: toSlug('GitHub')
 	},
-	{
+	[toSlug('LinkedIn')]: {
 		title: 'LinkedIn',
 		cover: 'https://placehold.co/300x300/e0e7ff/1e1b4b?text=LinkedIn',
 		link: 'https://linkedin.com/in/example',
 		slug: toSlug('LinkedIn')
 	},
-	{
+	[toSlug('Email')]: {
 		title: 'Email',
 		cover: 'https://placehold.co/300x300/e0e7ff/1e1b4b?text=Email',
 		link: 'mailto:example@example.com',
 		slug: toSlug('Email')
 	}
-];
+};
 
 // Combine all items for easy searching
-export const allItems = [...projects, ...posts, ...links];
+export const allItems = { ...projects, ...posts, ...links };
