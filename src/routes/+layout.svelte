@@ -4,6 +4,7 @@
 	import type { Snippet } from 'svelte';
 	import Parallax from '$lib/components/Parallax.svelte';
 	import CanvasPortalTarget from '$lib/components/CanvasPortalTarget.svelte';
+	import Player from '$lib/components/Player.svelte';
 
 	let { children }: { children: Snippet<[]> } = $props();
 </script>
@@ -15,5 +16,9 @@
 	<T.AmbientLight intensity={0.5} />
 	<CanvasPortalTarget />
 </Canvas>
+
+<div class="absolute top-4 right-8">
+	<Player />
+</div>
 
 {@render children()}

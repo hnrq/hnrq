@@ -10,7 +10,7 @@ Title: Lowpoly CD
 <script lang="ts">
 	import { T } from '@threlte/core';
 	import { useGltf } from '@threlte/extras';
-	import type { Snippet } from 'svelte';
+	import type { ComponentProps, Snippet } from 'svelte';
 	import type { Group, Object3DEventMap } from 'three';
 
 	let {
@@ -18,7 +18,7 @@ Title: Lowpoly CD
 		error,
 		ref = $bindable(),
 		...props
-	}: typeof T.Group & {
+	}: ComponentProps<typeof T.Group> & {
 		fallback?: Snippet<[]>;
 		error?: Snippet<[{ error: unknown }]>;
 		ref?: Group<Object3DEventMap>;

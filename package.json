@@ -26,6 +26,7 @@
     "@tailwindcss/vite": "^4.1.10",
     "@types/node": "^20",
     "@types/three": "^0.177.0",
+    "@types/youtube": "^0.1.2",
     "@yushijinhun/three-minifier-rollup": "^0.4.0",
     "eslint": "^9.18.0",
     "eslint-config-prettier": "^10.0.1",

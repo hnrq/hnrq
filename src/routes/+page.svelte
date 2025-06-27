@@ -5,8 +5,6 @@
 	import { cursorPosition, rackRotation } from '$lib/stores/index.svelte';
 	import { interactivity } from '@threlte/extras';
 
-	interactivity();
-
 	const handleSceneClick = () => {
 		if (Math.abs(cursorPosition.current[0]) < 0.01) return;
 		const amount = Math.PI / 2;
@@ -15,6 +13,8 @@
 </script>
 
 <CanvasPortal>
+	<!-- eslint-disable-next-line @typescript-eslint/no-unused-vars -->
+	{@const _ = interactivity()}
 	<InteractiveBackground onclick={handleSceneClick} />
 	<Rack />
 </CanvasPortal>
