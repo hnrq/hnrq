@@ -1,4 +1,5 @@
 <script lang="ts">
+	import CanvasPortal from '$lib/components/CanvasPortal.svelte';
 	import InteractiveBackground from '$lib/components/InteractiveBackground.svelte';
 	import Rack from '$lib/components/Rack.svelte';
 	import { cursorPosition, rackRotation } from '$lib/stores/index.svelte';
@@ -13,5 +14,7 @@
 	};
 </script>
 
-<InteractiveBackground onclick={handleSceneClick} />
-<Rack />
+<CanvasPortal>
+	<InteractiveBackground onclick={handleSceneClick} />
+	<Rack />
+</CanvasPortal>
