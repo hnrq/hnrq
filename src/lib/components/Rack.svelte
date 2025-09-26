@@ -12,11 +12,9 @@
 	const sideDistance = 1.0;
 	const cdSpacing = 0.5;
 
-	console.log(articles);
-
 	const sides = [
 		{ title: 'Projects', items: Object.values(projects) },
-		{ title: 'Posts', items: Object.values(articles) },
+		{ title: 'Posts', items: articles },
 		{ title: 'Links', items: Object.values(links) },
 		{ title: 'Nothing', items: [] }
 	];

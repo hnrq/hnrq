@@ -2,38 +2,23 @@
 	import { PUBLIC_YOUTUBE_PLAYLIST_API } from '$env/static/public';
 	import { onMount } from 'svelte';
 	import { Tween } from 'svelte/motion';
+	import Spinner from './Spinner.svelte';
 
 	const volume = new Tween(0, { duration: 2000 });
 	let playerContainer: HTMLElement | undefined = $state();
 	let player: YT.Player | undefined = $state();
-	let isPlaying: boolean = $state(false);
+	let playerState: YT.PlayerState | undefined = $state();
 	let videoData: YT.VideoData | undefined = $state();
 
 	const onPlayerReady = (event: { target: YT.Player }) => {
-		const playerInstance = event.target;
-		const playlist = playerInstance.getPlaylist();
-		playerInstance.setVolume(0);
-		if (playlist && playlist.length > 0) {
-			const randomIndex = Math.floor(Math.random() * playlist.length);
-			playerInstance.cueVideoById(playlist[randomIndex]);
-		}
+		event.target.setVolume(0);
+		event.target.setShuffle(true);
+		videoData = event.target.getVideoData();
+		playerState = event.target.getPlayerState();
 	};
 
 	const onPlayerStateChange = (event: { data: number; target: YT.Player }) => {
-		const playerState = event.data;
-		const playerInstance = event.target;
-
-		if (playerState === window.YT.PlayerState.PLAYING) {
-			volume.set(50);
-			isPlaying = true;
-		} else if (
-			playerState === window.YT.PlayerState.PAUSED ||
-			playerState === window.YT.PlayerState.ENDED
-		) {
-			volume.set(0);
-			isPlaying = false;
-		} else if (playerState === window.YT.PlayerState.CUED)
-			videoData = playerInstance.getVideoData();
+		playerState = event.data;
 	};
 
 	const onYouTubeIframeAPIReady = () => {
@@ -49,7 +34,7 @@
 				listType: 'playlist',
 				list: PUBLIC_YOUTUBE_PLAYLIST_API,
 				autoplay: 0,
-				controls: 0, // Hide all controls
+				controls: 0,
 				rel: 0,
 				showinfo: 0,
 				iv_load_policy: 3,
@@ -88,9 +73,21 @@
 	});
 
 	$effect(() => {
-		// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 		volume.current;
 		player?.setVolume?.(volume.current);
+	});
+
+	$effect(() => {
+		if (!window.YT) return;
+		if (playerState === window.YT.PlayerState.PLAYING) {
+			videoData = player?.getVideoData();
+			volume.set(50);
+		} else if (
+			playerState === window.YT.PlayerState.PAUSED ||
+			playerState === window.YT.PlayerState.ENDED
+		) {
+			volume.set(0);
+		}
 	});
 </script>
 
@@ -107,17 +104,19 @@
 				</svg>
 			</button>
 
-			{#if !isPlaying}
+			{#if playerState === window.YT.PlayerState.PAUSED || playerState === window.YT.PlayerState.CUED}
 				<button onclick={() => player?.playVideo()} class="cursor-pointer" aria-label="Play">
 					<svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg
 					>
 				</button>
-			{:else}
+			{:else if playerState === window.YT.PlayerState.PLAYING}
 				<button onclick={() => player?.pauseVideo()} class="cursor-pointer" aria-label="Pause">
 					<svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
 						<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
 					</svg>
 				</button>
+			{:else}
+				<Spinner />
 			{/if}
 
 			<button onclick={() => player?.previousVideo()} class="cursor-pointer" aria-label="Next">
