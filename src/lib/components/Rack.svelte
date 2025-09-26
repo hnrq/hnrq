@@ -1,18 +1,22 @@
 <script lang="ts">
 	import { T } from '@threlte/core';
-	import { projects, posts, links } from '$lib/data';
+	import { projects, links } from '$lib/data';
 	import { rackRotation } from '$lib/stores/index.svelte';
 	import CDCase from './CDCase.svelte';
 	import { type Group, type Object3DEventMap } from 'three';
+
+	const { articles }: { articles: JSON } = $props();
 
 	let rackRef: Group<Object3DEventMap> | undefined = $state();
 
 	const sideDistance = 1.0;
 	const cdSpacing = 0.5;
 
+	console.log(articles);
+
 	const sides = [
 		{ title: 'Projects', items: Object.values(projects) },
-		{ title: 'Posts', items: Object.values(posts) },
+		{ title: 'Posts', items: Object.values(articles) },
 		{ title: 'Links', items: Object.values(links) },
 		{ title: 'Nothing', items: [] }
 	];

@@ -33,27 +33,6 @@ export const projects: Record<string, PortfolioItem> = {
 	}
 };
 
-export const posts: Record<string, PortfolioItem> = {
-	[toSlug('Post 1')]: {
-		title: 'Post 1',
-		cover: 'https://placehold.co/300x300/d1fae5/064e3b?text=Post+1',
-		link: 'https://dev.to/example/post1',
-		slug: toSlug('Post 1')
-	},
-	[toSlug('Post 2')]: {
-		title: 'Post 2',
-		cover: 'https://placehold.co/300x300/d1fae5/064e3b?text=Post+2',
-		link: 'https://dev.to/example/post2',
-		slug: toSlug('Post 2')
-	},
-	[toSlug('Post 3')]: {
-		title: 'Post 3',
-		cover: 'https://placehold.co/300x300/d1fae5/064e3b?text=Post+3',
-		link: 'https://dev.to/example/post3',
-		slug: toSlug('Post 3')
-	}
-};
-
 export const links: Record<string, PortfolioItem> = {
 	[toSlug('GitHub')]: {
 		title: 'GitHub',
@@ -76,4 +55,4 @@ export const links: Record<string, PortfolioItem> = {
 };
 
 // Combine all items for easy searching
-export const allItems = { ...projects, ...posts, ...links };
+export const allItems = { ...projects, ...links };
